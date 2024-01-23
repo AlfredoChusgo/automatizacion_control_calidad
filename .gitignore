@@ -361,3 +361,198 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+
+# Flutter/Dart specific
+*.iml
+.dart_tool/
+.idea/
+.vscode/
+
+# iOS
+ios/Pods/
+ios/Podfile.lock
+ios/Podfile.lock.backup
+ios/Podfile.zip
+ios/Runner.xcworkspace/
+
+# Android
+android/build/
+android/app/build/
+android/.gradle/
+android/gradle/
+android/local.properties
+android/captured_trace.pb
+android/intermediates/
+android/key.properties
+
+# Web
+web/build/
+
+# Flutter web generated files
+lib/generated_plugin_registrant.dart
+
+# macOS
+macos/Flutter/ephemeral/
+
+# Windows
+windows/Flutter/ephemeral/
+
+# IntelliJ
+*.iml
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# VSCode
+.vscode/
+
+# Android Studio
+*.iml
+.idea/
+.gradle/
+/captures/
+
+# Flutter plugin registry
+.pub-cache/
+
+# Packages
+packages/
+
+# Pubspec YAML file
+pubspec.lock
+
+# Dart packages
+**/pubspec.yaml
+**/pubspec.lock
+
+# Flutter Secure Storage (or any other sensitive configuration files)
+secrets.json
+secrets.yaml
+
+# Xcode
+.DS_Store
+*.pbxproj
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+
+# Android
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# VS Code
+.vscode/
+
+# WebStorm
+.idea/
+
+# Android Studio
+*.iml
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/gradle.xml
+.idea/assetWizardSettings.xml
+.idea/dictionaries
+
+# Flutter IntelliJ
+.dart_tool/
+.idea/
+
+# Test
+test/coverage/
+test/report/
+
+# Android/IntelliJ
+build/
+*.class
+*.jar
+*.war
+*.ear
+*.hprof
+gen/
+bin/
+local.properties
+.gradle
+/local.properties
+
+# Gradle
+.gradle/
+build/
+
+# Lint
+lint/
+
+# Temporary files
+**/temp/
+**/tmp/
+**/*.tmp/
+**/*.bak/
+**/*.swp/
+**/._*/
+
+# Subversion
+.svn/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# virtual machine crash logs, see https://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# IntelliJ
+.idea/
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.userprefs
+*.hprof
+
+# Python
+*.pyc
+*.pyo
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Node.js
+node_modules/
+jspm_packages/
+
+# Webpack
+/dist/
+/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+Desktop.ini
+Thumbs.db
+ehthumbs.db
+
+# Windows Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Desktop Service Store Database Files
+DesktopServicesDatabase/
+
+# OneDrive
+*.onedrive
+*.one
+*.swp

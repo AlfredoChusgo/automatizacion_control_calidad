@@ -6,7 +6,17 @@ var builder = WebApplication.CreateBuilder(args);
 
     builder.Services        
         .AddApplication()
-        .AddInfrastructure();
+        .AddInfrastructure()
+        .AddCors(options =>
+        {
+            options.AddDefaultPolicy(builder =>
+            {
+                builder
+                    .AllowAnyOrigin()         // You can restrict this to specific origins
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            });
+        });
 }
 
 // Add services to the container.
@@ -23,7 +33,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseCors();
 app.UseHttpsRedirection();
 app.MapControllers();
 app.Run();
