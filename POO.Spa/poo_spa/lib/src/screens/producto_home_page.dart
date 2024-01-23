@@ -1,8 +1,9 @@
+import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:poo_spa/src/blocs/productos_bloc.dart';
 import 'package:poo_spa/src/repositories/producto_repository.dart';
-
+import 'package:barcode/barcode.dart';
 import '../models/producto.dart';
 
 class ProductoHomePage extends StatelessWidget {
@@ -24,7 +25,7 @@ class ProductoHomePage extends StatelessWidget {
             // Add your action here
             print('FloatingActionButton pressed!');
           },
-          child: Icon(Icons.add),
+          child: const Icon(Icons.add),
         ),
         body: Center(
             child: BlocListener<ProductosBloc, ProductosState>(
@@ -42,6 +43,39 @@ class ProductoHomePage extends StatelessWidget {
             //     message: message,
             //   ).show(Navigator.of(context).context);
             // }
+            if (state.errorMessage.isNotEmpty) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  backgroundColor: Colors.redAccent,
+                  content: Text(state.errorMessage),
+                  duration:
+                      Duration(seconds: 2), // Adjust the duration as needed
+                ),
+              );
+            }
+
+            if (state.infoMessage.isNotEmpty) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  backgroundColor: Colors.blueAccent,
+                  content: Text(state.infoMessage),
+                  duration:
+                      Duration(seconds: 2), // Adjust the duration as needed
+                ),
+              );
+            }
+
+            
+            if (state.successMessage.isNotEmpty) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  backgroundColor: Colors.greenAccent,
+                  content: Text(state.infoMessage),
+                  duration:
+                      Duration(seconds: 2), // Adjust the duration as needed
+                ),
+              );
+            }
           },
           child: BlocBuilder<ProductosBloc, ProductosState>(
             builder: (context, state) {
@@ -49,38 +83,68 @@ class ProductoHomePage extends StatelessWidget {
                 return const CircularProgressIndicator();
               }
 
-              return ListView.builder(
+              return ListView.separated(
+                separatorBuilder: (context, index) {
+                  // Add a SizedBox to define the space between items
+                  return const Divider(
+                      height: 20); // Adjust the height as needed
+                },
                 itemCount: state.productos.length,
                 itemBuilder: (context, index) {
+                  var producto = state.productos[index];
                   return ListTile(
-                    title: Text(state.productos[index].nombre),
+                    title: Text(producto.nombre),
+                    subtitle: Text(producto.getDescription()),
+                    leading: BarcodeWidget(
+                      barcode: Barcode.code128(),
+                      data: producto.codigoBarra,
+                      width: 150,
+                      height: 50,
+                    ),
+                    trailing: PopupMenuButton<String>(
+                      tooltip: "Mostrar Menu",
+                      itemBuilder: (context) => [
+                        const PopupMenuItem(
+                          value: 'info',
+                          child: ListTile(
+                            leading: Icon(Icons.info),
+                            title: Text('Detalle'),
+                          ),
+                        ),
+                        const PopupMenuItem(
+                          value: 'edit',
+                          child: ListTile(
+                            leading: Icon(Icons.edit),
+                            title: Text('Editar'),
+                          ),
+                        ),
+                        const PopupMenuItem(
+                          value: 'delete',
+                          child: ListTile(
+                            leading: Icon(Icons.delete),
+                            title: Text('Eliminar'),
+                          ),
+                        ),
+                      ],
+                      onSelected: (String value) {
+                        // Handle the selected action
+                        if (value == 'info') {
+                          // Add your action for Info
+                        } else if (value == 'edit') {
+                          // Add your action for Edit
+                        } else if (value == 'delete') {
+                          context
+                              .read<ProductosBloc>()
+                              .add(DeleteProductoEvent(producto.sku));
+                        }
+                      },
+                    ),
                     onTap: () {
-                      // Add your action when a list item is tapped                      
+                      // Add your action when a list item is tapped
                     },
                   );
                 },
               );
-              // return switch (state) {
-              //   PacienteHomeLoadingState() => const SliverFillRemaining(
-              //       child: Center(child: CircularProgressIndicator()),
-              //     ),
-              //   PacienteHomeErrorState() => SliverFillRemaining(
-              //       child: Text(state.errorMessage),
-              //     ),
-              //   PacienteHomeLoadedState() => SliverList(
-              //       delegate: SliverChildBuilderDelegate(
-              //         (context, index) => PacienteListItem(
-              //           state.pacientes[index],
-              //         ),
-              //         childCount: state.pacientes.length,
-              //       ),
-              //     ),
-              //   PacienteHomeEmptyList() => SliverFillRemaining(
-              //       child: Center(
-              //           child: Text('Sin nada \nque mostrar.... \u{1F644}',
-              //               style:
-              //                   Theme.of(context).textTheme.headlineMedium)))
-              // };
             },
           ),
         )),
@@ -89,120 +153,3 @@ class ProductoHomePage extends StatelessWidget {
     );
   }
 }
-
-// class ProductoListItem extends StatefulWidget {
-//   final Producto item;
-//   const ProductoListItem(this.item, {super.key});
-//   @override
-//   ProductoListItemState createState() => ProductoListItemState();
-// }
-
-// class ProductoListItemState extends State<ProductoListItem> {
-//   //
-//   bool _isExpanded = false;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final textTheme = Theme.of(context).textTheme.titleMedium;
-//     final title =
-//         '${widget.item.nombre} ${widget.item.apellidoPaterno} ${widget.item.apellidoMaterno}';
-//     final icon = widget.item.sexo == Sexo.femenino ? Icons.female : Icons.male;
-//     final subTitle = '${widget.item.direccionResidencia} ';
-//     var backgroundColor =
-//         widget.item.sexo == Sexo.masculino ? Colors.blue : Colors.pink;
-//     return ExpansionTile(
-//       backgroundColor: backgroundColor[200],
-//       collapsedBackgroundColor: backgroundColor[100],
-//       collapsedIconColor: backgroundColor[300],
-//       iconColor: backgroundColor[400],
-
-//       leading: Icon(icon),
-//       title: Text(title, style: textTheme),
-//       collapsedTextColor: Colors.black,
-//       subtitle: Text(subTitle, style: Theme.of(context).textTheme.bodySmall),
-//       //trailing: const Icon(Icons.menu),
-
-//       onExpansionChanged: (value) {
-//         setState(() {
-//           _isExpanded = value;
-//         });
-//       },
-//       children: [
-//         // ListTile(
-//         //   title: Text('Item Details'),
-//         // ),
-//         if (_isExpanded)
-//           Row(
-//             mainAxisAlignment: MainAxisAlignment.spaceAround,
-//             children: [
-//               ButtonBar(
-//                 children: [
-//                   IconButton(
-//                     onPressed: () {
-//                       EstadiaPacienteFilter filter =
-//                           EstadiaPacienteFilter.empty();
-
-//                       context.read<EstadiaPacienteHomeBloc>().add(
-//                           EstadiaPacienteHomeRefreshWithFiltersEvent(
-//                               filter: filter.copyWith(
-//                                   paciente: widget.item,
-//                                   pacienteFilterEnabled: true)));
-//                       context.read<EstadiaPacienteFilterBloc>().add(
-//                           SelectPacienteFromListevent(paciente: widget.item));
-//                       context
-//                           .read<EstadiaPacienteFilterBloc>()
-//                           .add(EnablePacienteFilterEvent());
-
-//                       Navigator.pushNamed(context, '/estadiaPacienteFiltered');
-//                     },
-//                     icon: const Icon(Icons.history),
-//                   ),
-//                   IconButton(
-//                     onPressed: () {
-//                       //todo
-//                       context.read<EstadiaPacienteFormBloc>().add(
-//                           NewEstadiaPacienteFormEvent(paciente: widget.item));
-//                       Navigator.pushNamed(context, '/estadiaPacienteAdd');
-//                     },
-//                     icon: const Icon(Icons.add),
-//                   ),
-//                 ],
-//               ),
-//               ButtonBar(
-//                 children: [
-//                   IconButton(
-//                     onPressed: () {
-//                       BlocProvider.of<PacienteFormBloc>(context).add(
-//                           PacienteDetailsInReadOnlyEvent(
-//                               paciente: widget.item));
-//                       Navigator.pushNamed(context, '/pacienteDetails');
-//                     },
-//                     icon: const Icon(Icons.info),
-//                   ),
-//                   IconButton(
-//                     onPressed: () {
-//                       BlocProvider.of<PacienteFormBloc>(context)
-//                           .add(PacienteEditEvent(widget.item));
-//                       Navigator.pushNamed(context, '/pacienteEdit');
-//                     },
-//                     icon: const Icon(Icons.edit),
-//                   ),
-//                   IconButton(
-//                     onPressed: () {
-//                       // Handle remove button press
-//                       BlocProvider.of<PacienteFormBloc>(context)
-//                           .add(PacientePerformDelete(id: widget.item.id));
-//                     },
-//                     icon: const Icon(Icons.delete),
-//                     style: ElevatedButton.styleFrom(
-//                       backgroundColor: Colors.red,
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//             ],
-//           )
-//       ],
-//     );
-//   }
-// }

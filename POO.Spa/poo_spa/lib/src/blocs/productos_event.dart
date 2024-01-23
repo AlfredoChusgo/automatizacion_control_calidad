@@ -33,10 +33,9 @@ class EditProductoEvent extends ProductosEvent{
 }
 
 class DeleteProductoEvent extends ProductosEvent{
-  final Producto producto;
   final String sku;
-  const DeleteProductoEvent(this.producto,this.sku);
+  const DeleteProductoEvent(this.sku);
 
   @override
-  List<Object> get props=>[producto,sku];
+  List<Object> get props=>[sku];
 }

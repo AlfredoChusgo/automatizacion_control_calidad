@@ -55,7 +55,7 @@ public class ProductosController : ControllerBase
 
         if (result is not null)
         {
-            return NoContent();
+            return Ok(result);
         }
 
         return NotFound();

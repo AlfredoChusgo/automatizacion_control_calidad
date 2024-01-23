@@ -85,4 +85,12 @@ class Producto extends Equatable {
       nombreProveedor: json['nombreProveedor'],
     );
   }
+
+  String getDescription(){
+    var peso = double.parse(this.peso.toStringAsFixed(2));
+    var precio = double.parse(this.precio.toStringAsFixed(2));
+    String subtitle = "${peso} ${this.unidadMedida} --  ${precio} Bs ";
+
+    return subtitle;
+  }
 }

@@ -18,7 +18,7 @@ public class DataSeederService
     {
         if (!_context.Productos.Any())
         {
-            var faker = new Faker<Producto>()
+            var faker = new Faker<Producto>("es")
                 .RuleFor(p => p.Sku, f => f.Random.AlphaNumeric(8).ToUpper())
                 .RuleFor(p => p.SkuAlternante, f => f.Random.AlphaNumeric(8).ToUpper())
                 .RuleFor(p => p.SkuFabricante, f => f.Random.AlphaNumeric(8).ToUpper())
