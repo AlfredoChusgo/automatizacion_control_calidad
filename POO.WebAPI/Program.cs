@@ -1,8 +1,12 @@
+using Microsoft.EntityFrameworkCore;
 using POO.Application;
 using POO.Infrastructure;
+using POO.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
-{    
+
+{
+
     builder.Services        
         .AddApplication()
         .AddInfrastructure();

@@ -10,12 +10,14 @@ namespace POO.Infrastructure.Persistence
 {
     public class ApplicationDbContext : DbContext
     {
-        public DbSet<Producto> Productos { get; set; } = null!;
+        public DbSet<Producto> Productos { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
         {
+            
         }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
