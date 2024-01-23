@@ -50,6 +50,37 @@ class Producto extends Equatable {
         nombreProveedor,
       ];
 
+  // CopyWith method
+  Producto copyWith({
+    String? sku,
+    String? skuAlternante,
+    String? skuFabricante,
+    String? nombre,
+    String? nombreExtranjero,
+    String? codigoGrupo,
+    double? peso,
+    double? precio,
+    String? unidadMedida,
+    String? codigoBarra,
+    String? nombreFabricante,
+    String? nombreProveedor,
+  }) {
+    return Producto(
+      sku: sku ?? this.sku,
+      skuAlternante: skuAlternante ?? this.skuAlternante,
+      skuFabricante: skuFabricante ?? this.skuFabricante,
+      nombre: nombre ?? this.nombre,
+      nombreExtranjero: nombreExtranjero ?? this.nombreExtranjero,
+      codigoGrupo: codigoGrupo ?? this.codigoGrupo,
+      peso: peso ?? this.peso,
+      precio: precio ?? this.precio,
+      unidadMedida: unidadMedida ?? this.unidadMedida,
+      codigoBarra: codigoBarra ?? this.codigoBarra,
+      nombreFabricante: nombreFabricante ?? this.nombreFabricante,
+      nombreProveedor: nombreProveedor ?? this.nombreProveedor,
+    );
+  }
+  
   // Add toJson method to convert Producto to JSON
   Map<String, dynamic> toJson() {
     return {
@@ -93,4 +124,19 @@ class Producto extends Equatable {
 
     return subtitle;
   }
+
+    // Named constructor with default values for an empty instance
+  const Producto.empty()
+      : sku = '',
+        skuAlternante = '',
+        skuFabricante = '',
+        nombre = '',
+        nombreExtranjero = '',
+        codigoGrupo = '',
+        peso = 0.0,
+        precio = 0.0,
+        unidadMedida = '',
+        codigoBarra = '',
+        nombreFabricante = '',
+        nombreProveedor = '';
 }

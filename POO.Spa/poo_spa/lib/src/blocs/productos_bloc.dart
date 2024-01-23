@@ -39,7 +39,7 @@ class ProductosBloc extends Bloc<ProductosEvent, ProductosState> {
             productos: productos,
             isLoading: false,
             errorMessage: "",
-            infoMessage: "",
+            infoMessage: "Producto creado",
             successMessage: ""));
       } catch (e) {
         var productos = await repository.fetchProductos();
@@ -47,7 +47,7 @@ class ProductosBloc extends Bloc<ProductosEvent, ProductosState> {
             productos: productos,
             isLoading: false,
             errorMessage: e.toString(),
-            infoMessage: "Producto creado",
+            infoMessage: "",
             successMessage: ""));
       }
     });

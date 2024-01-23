@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:poo_spa/src/blocs/productos_bloc.dart';
 import 'package:poo_spa/src/repositories/producto_repository.dart';
 import 'package:barcode/barcode.dart';
+import 'package:poo_spa/src/screens/producto_form_page.dart';
 import '../models/producto.dart';
 
 class ProductoHomePage extends StatelessWidget {
@@ -15,15 +16,27 @@ class ProductoHomePage extends StatelessWidget {
     //
     // The AnimatedBuilder Widget listens to the SettingsController for changes.
     // Whenever the user updates their settings, the MaterialApp is rebuilt.
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: const Text('Productos'),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             // Add your action here
-            print('FloatingActionButton pressed!');
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ProductoFormPage(
+                        isReadOnly: false,
+                        producto: const Producto.empty(),
+                        saveButtonText: "Guardar",
+                        callback: (producto) {
+                          context
+                              .read<ProductosBloc>()
+                              .add(AddProductoEvent(producto));
+                        },
+                      )),
+            );
           },
           child: const Icon(Icons.add),
         ),
@@ -65,7 +78,6 @@ class ProductoHomePage extends StatelessWidget {
               );
             }
 
-            
             if (state.successMessage.isNotEmpty) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
@@ -129,8 +141,35 @@ class ProductoHomePage extends StatelessWidget {
                       onSelected: (String value) {
                         // Handle the selected action
                         if (value == 'info') {
-                          // Add your action for Info
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProductoFormPage(
+                                      isReadOnly: true,
+                                      producto: producto,
+                                      saveButtonText: "",
+                                      callback: (producto) {
+                                        // context.read<ProductosBloc>().add(
+                                        //     EditProductoEvent(
+                                        //         producto, producto.sku));
+                                      },
+                                    )),
+                          );
                         } else if (value == 'edit') {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProductoFormPage(
+                                      isReadOnly: false,
+                                      producto: producto,
+                                      saveButtonText: "Editar",
+                                      callback: (producto) {
+                                        context.read<ProductosBloc>().add(
+                                            EditProductoEvent(
+                                                producto, producto.sku));
+                                      },
+                                    )),
+                          );
                           // Add your action for Edit
                         } else if (value == 'delete') {
                           context
@@ -139,17 +178,12 @@ class ProductoHomePage extends StatelessWidget {
                         }
                       },
                     ),
-                    onTap: () {
-                      // Add your action when a list item is tapped
-                    },
                   );
                 },
               );
             },
           ),
         )),
-      ),
-      debugShowCheckedModeBanner: false,
-    );
+      );
   }
 }

@@ -24,6 +24,6 @@ class MyApp extends StatelessWidget {
         create: (_) => ProductosBloc(repository: productRepository
         )..add(const LoadProductosEvent()),
       )
-    ], child: const ProductoHomePage());
+    ], child: MaterialApp(home: const ProductoHomePage()));
   }
 }

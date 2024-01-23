@@ -19,10 +19,9 @@ decimal Peso,
 decimal Precio,
 string UnidadMedida,
 string CodigoBarra,
-string Fabricante,
 string NombreFabricante,
-string Proveedor,
 string NombreProveedor) : IRequest<Producto>;
+
 
 public record UpdateProductoCommand(
 string Sku,
@@ -35,9 +34,7 @@ decimal Peso,
 decimal Precio,
 string UnidadMedida,
 string CodigoBarra,
-string Fabricante,
 string NombreFabricante,
-string Proveedor,
 string NombreProveedor) : IRequest<Producto>;
 
 public record DeleteProductoCommand(string Sku) : IRequest<Producto>;

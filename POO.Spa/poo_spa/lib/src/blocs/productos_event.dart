@@ -15,6 +15,14 @@ class LoadProductosEvent extends ProductosEvent{
   List<Object> get props=>[];
 }
 
+// class DetailProductoEvent extends ProductosEvent{
+//   final Producto producto;
+//   const DetailProductoEvent(this.producto);
+
+//   @override
+//   List<Object> get props=>[producto];
+// }
+
 class AddProductoEvent extends ProductosEvent{
   final Producto producto;
   const AddProductoEvent(this.producto);

@@ -21,8 +21,9 @@ class ProductosRepository  {
 
   Future<Producto> createProducto(Producto producto) async {
     final response = await http.post(
-      Uri.parse('$baseUrl'),
+      Uri.parse(baseUrl),
       headers: {'Content-Type': 'application/json'},
+      // body: json.encode(producto.toJson()),
       body: json.encode(producto.toJson()),
     );
 
