@@ -1,4 +1,12 @@
+using POO.Application;
+using POO.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
+{    
+    builder.Services        
+        .AddApplication()
+        .AddInfrastructure();
+}
 
 // Add services to the container.
 
@@ -18,7 +26,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+//app.UseAuthorization();
 
 app.MapControllers();
 

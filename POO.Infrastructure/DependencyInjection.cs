@@ -20,7 +20,7 @@ namespace POO.Infrastructure
             services.AddScoped<IProductoRepository, ProductoRepository>();
             services.AddScoped<DataSeederService>();
 
-            ExecuteSeedData(services);
+            //ExecuteSeedData(services);
 
             return services;
         }

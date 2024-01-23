@@ -12,10 +12,7 @@ namespace POO.Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            services.AddMediatR(typeof(DependencyInjection).Assembly);
-
-            services.AddScoped(
-                typeof(IPipelineBehavior<,>));
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly));
 
             return services;
         }
