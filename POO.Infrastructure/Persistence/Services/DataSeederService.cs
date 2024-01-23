@@ -32,7 +32,7 @@ public class DataSeederService
                 .RuleFor(p => p.NombreFabricante, f => f.Company.CompanyName())
                 .RuleFor(p => p.NombreProveedor, f => f.Company.CompanyName());
 
-            var productos = faker.Generate(20); // Generate 10 fake products
+            var productos = faker.Generate(100); // Generate 100 fake products
 
             _context.Productos.AddRange(productos);
             _context.SaveChanges();

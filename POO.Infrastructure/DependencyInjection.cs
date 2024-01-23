@@ -15,13 +15,13 @@ namespace POO.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
-            //optionsBuilder.UseSqlite("Data Source=app.db", x => x.MigrationsAssembly("POO.Infrastructure");
+
             services.AddDbContext<ApplicationDbContext>(
                 options => options.UseSqlite("Data Source=../POO.Infrastructure/Persistence/app.db"));
             services.AddScoped<IProductoRepository, ProductoRepository>();
             services.AddScoped<DataSeederService>();
 
-            //ExecuteSeedData(services);
+            ExecuteSeedData(services);
 
             return services;
         }

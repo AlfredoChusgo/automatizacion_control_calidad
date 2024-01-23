@@ -11,6 +11,9 @@ var builder = WebApplication.CreateBuilder(args);
         .AddApplication()
         .AddInfrastructure();
 }
+//builder.Services.AddDbContext<ApplicationDbContext>(
+//                options => options.UseSqlite("Data Source=app.db", x => x.MigrationsAssembly("POO.WebAPI")));
+
 
 // Add services to the container.
 
