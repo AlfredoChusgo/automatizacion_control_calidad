@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:faker/faker.dart';
 
 class Producto extends Equatable {
   // Producto
@@ -80,7 +81,7 @@ class Producto extends Equatable {
       nombreProveedor: nombreProveedor ?? this.nombreProveedor,
     );
   }
-  
+
   // Add toJson method to convert Producto to JSON
   Map<String, dynamic> toJson() {
     return {
@@ -139,4 +140,22 @@ class Producto extends Equatable {
         codigoBarra = '',
         nombreFabricante = '',
         nombreProveedor = '';
+
+   factory Producto.fake() {
+    final faker = Faker();
+    return Producto(
+      sku: faker.guid.guid(),
+      skuAlternante: faker.guid.guid(),
+      skuFabricante: faker.guid.guid(),
+      nombre: faker.food.dish(),
+      nombreExtranjero: faker.food.dish(),
+      codigoGrupo: faker.guid.guid(),
+      peso: faker.randomGenerator.decimal(),
+      precio: faker.randomGenerator.decimal(),
+      unidadMedida: faker.randomGenerator.element(['kg', 'g', 'oz']),
+      codigoBarra: faker.randomGenerator.numberOfLength(9),
+      nombreFabricante: faker.company.name(),
+      nombreProveedor: faker.company.name(),
+    );
+  }
 }

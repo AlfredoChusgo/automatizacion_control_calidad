@@ -6,7 +6,8 @@ import 'package:poo_spa/src/screens/producto_home_page.dart';
 
 
 /// The Widget that configures your application.
-var productRepository = ProductosRepository(baseUrl: "https://localhost:7285/api/Productos");
+// var productRepository = ProductosRepository(baseUrl: "https://192.168.0.12:7285/api/Productos");
+ var productRepository = ProductosRepository(baseUrl: "http://192.168.0.12:5285/api/Productos");
 class MyApp extends StatelessWidget {
   const MyApp({
     super.key
@@ -24,6 +25,6 @@ class MyApp extends StatelessWidget {
         create: (_) => ProductosBloc(repository: productRepository
         )..add(const LoadProductosEvent()),
       )
-    ], child: MaterialApp(home: const ProductoHomePage()));
+    ], child: const MaterialApp(home: ProductoHomePage(),debugShowCheckedModeBanner: false,));
   }
 }

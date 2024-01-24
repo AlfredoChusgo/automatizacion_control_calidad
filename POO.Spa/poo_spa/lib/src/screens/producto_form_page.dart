@@ -118,6 +118,25 @@ class _ProductoFormState extends State<ProductoForm> {
               "Producto",
               style: Theme.of(context).textTheme.headlineSmall,
             ),
+            FloatingActionButton(
+            onPressed: () {
+              // Add your floating action button logic here
+              var productFake = Producto.fake();
+              skuController.text = productFake.sku ;
+              skuAlternanteController.text = productFake.skuAlternante ;
+              skuFabricanteController.text = productFake.skuFabricante ;
+              nombreController.text = productFake.nombre ;
+              nombreExtranjeroController.text = productFake.nombreExtranjero ;
+              codigoGrupoController.text = productFake.codigoGrupo ;
+              pesoController.text = productFake.peso.toString();
+              precioController.text = productFake.precio.toString() ;
+              unidadMedidaController.text = productFake.unidadMedida ;
+              codigoBarraController.text = productFake.codigoBarra ;
+              nombreFabricanteController.text = productFake.nombreFabricante ;
+              nombreProveedorController.text = productFake.nombreProveedor;
+            },
+            child: Icon(Icons.question_mark),
+          ),
             const SizedBox(height: 16.0),
             TextFormField(
               readOnly: widget.isReadOnly,
