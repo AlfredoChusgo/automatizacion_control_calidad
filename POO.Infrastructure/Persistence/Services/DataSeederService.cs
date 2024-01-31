@@ -26,7 +26,7 @@ public class DataSeederService
                 .RuleFor(p => p.NombreExtranjero, f => f.Commerce.ProductName())
                 .RuleFor(p => p.CodigoGrupo, f => f.Random.AlphaNumeric(4).ToUpper())
                 .RuleFor(p => p.Peso, f => f.Random.Decimal(1, 10))
-                .RuleFor(p => p.Precio, f => f.Random.Decimal(10, 100))
+                .RuleFor(p => p.Precio, f => f.Random.Double(10, 100))
                 .RuleFor(p => p.UnidadMedida, f => f.PickRandom("KG", "LB", "EA"))
                 .RuleFor(p => p.CodigoBarra, f => f.Commerce.Ean13())
                 .RuleFor(p => p.NombreFabricante, f => f.Company.CompanyName())

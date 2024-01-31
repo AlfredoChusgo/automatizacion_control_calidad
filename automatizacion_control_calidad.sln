@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32602.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POO.WebAPI", "POO.WebAPI\POO.WebAPI.csproj", "{6A754B2D-8B0D-4231-A70C-3762F6821ED5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "POO.WebAPI", "POO.WebAPI\POO.WebAPI.csproj", "{6A754B2D-8B0D-4231-A70C-3762F6821ED5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POO.Domain", "POO.Domain\POO.Domain.csproj", "{366AAF83-271D-400A-B52B-42F634747248}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "POO.Domain", "POO.Domain\POO.Domain.csproj", "{366AAF83-271D-400A-B52B-42F634747248}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POO.Application", "POO.Application\POO.Application.csproj", "{3CE54280-DDBC-4713-AE86-BFEDAD3C6625}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "POO.Application", "POO.Application\POO.Application.csproj", "{3CE54280-DDBC-4713-AE86-BFEDAD3C6625}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POO.Infrastructure", "POO.Infrastructure\POO.Infrastructure.csproj", "{177FAE80-77A2-4ABF-8A02-992025708678}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "POO.Infrastructure", "POO.Infrastructure\POO.Infrastructure.csproj", "{177FAE80-77A2-4ABF-8A02-992025708678}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{D52E8FA5-BD0A-4269-9376-AE202B2B06DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Poo.Infrastructure.Test", "Poo.Infrastructure.Test\Poo.Infrastructure.Test.csproj", "{5432C61D-EAB4-4410-BE30-5AD0D9290440}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{177FAE80-77A2-4ABF-8A02-992025708678}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{177FAE80-77A2-4ABF-8A02-992025708678}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{177FAE80-77A2-4ABF-8A02-992025708678}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5432C61D-EAB4-4410-BE30-5AD0D9290440}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5432C61D-EAB4-4410-BE30-5AD0D9290440}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5432C61D-EAB4-4410-BE30-5AD0D9290440}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5432C61D-EAB4-4410-BE30-5AD0D9290440}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

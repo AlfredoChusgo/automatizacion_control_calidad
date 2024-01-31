@@ -16,7 +16,7 @@ namespace POO.Domain
         public string NombreExtranjero { get; set; }
         public string CodigoGrupo { get; set; }
         public decimal Peso { get; set; }
-        public decimal Precio { get; set; }
+        public double Precio { get; set; }
         public string UnidadMedida { get; set; }
         public string CodigoBarra{ get; set; }
 
@@ -25,5 +25,8 @@ namespace POO.Domain
 
         //Proveedor
         public string NombreProveedor { get; set; }
+
+
+        public List<FacturaVentaProducto> FacturasVentasProductos { get; set; }
     }
 }

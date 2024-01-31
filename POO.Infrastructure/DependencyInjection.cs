@@ -16,8 +16,11 @@ namespace POO.Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
 
+            //services.AddDbContext<ApplicationDbContext>(
+            //    options => options.UseSqlite("Data Source=../POO.Infrastructure/Persistence/app.db")); // to use this is required to apply a migration
+
             services.AddDbContext<ApplicationDbContext>(
-                options => options.UseSqlite("Data Source=../POO.Infrastructure/Persistence/app.db"));
+                options => options.UseInMemoryDatabase("app_db"));
             services.AddScoped<IProductoRepository, ProductoRepository>();
             services.AddScoped<DataSeederService>();
 
