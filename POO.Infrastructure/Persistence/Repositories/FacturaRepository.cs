@@ -1,16 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using POO.Application.Common.Interfaces.Persistence;
+using POO.Application.FacturaVentas.Commands;
 using POO.Domain;
 using POO.Infrastructure.Persistence.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Json;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace POO.Infrastructure.Persistence.Repositories
 {
-    public class FacturaRepository
+    public class FacturaRepository : IFacturaVentaRepository
     {
         private readonly ApplicationDbContext _context;
         private const double IVA = 0.13;
@@ -18,14 +14,14 @@ namespace POO.Infrastructure.Persistence.Repositories
         {
             _context = context;
         }
-        public void AddFacturaVenta(CrearFacturaVentaCommand command)
+        public void AddFacturaVenta(CreateFacturaVentaCommand command)
         {
             ValidarCrearFacturaVentaCommand(command);
 
             GenerarFactura(command);
         }
 
-        private void GenerarFactura(CrearFacturaVentaCommand command)
+        private void GenerarFactura(CreateFacturaVentaCommand command)
         {
             double total = 0;
             var facturaVenta = new FacturaVenta()
@@ -67,7 +63,7 @@ namespace POO.Infrastructure.Persistence.Repositories
             _context.SaveChanges();
         }
 
-        private void ValidarCrearFacturaVentaCommand(CrearFacturaVentaCommand command)
+        private void ValidarCrearFacturaVentaCommand(CreateFacturaVentaCommand command)
         {
             if(command.ClienteId == 0)
             {
@@ -100,6 +96,17 @@ namespace POO.Infrastructure.Persistence.Repositories
                     throw new ArgumentException($"Servicio ${item.ServicioId} no valido");
                 }
             });
+        }
+
+        public FacturaVenta GetById(int id)
+        {
+            var facturaVentaFromDb = _context.FacturaVentas.FirstOrDefault(e=>e.Id == id);
+            return facturaVentaFromDb ?? throw new Exception($"Not found with id ${id}");
+        }
+
+        public IEnumerable<FacturaVenta> GetAll()
+        {
+            return _context.FacturaVentas.ToList();
         }
     }
 }

@@ -22,6 +22,7 @@ namespace POO.Infrastructure
             services.AddDbContext<ApplicationDbContext>(
                 options => options.UseInMemoryDatabase("app_db"));
             services.AddScoped<IProductoRepository, ProductoRepository>();
+            services.AddScoped<IFacturaVentaRepository, FacturaRepository>();
             services.AddScoped<DataSeederService>();
 
             ExecuteSeedData(services);

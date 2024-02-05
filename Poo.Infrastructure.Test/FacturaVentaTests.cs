@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System;
 using Xunit;
 using System.Linq;
-using POO.Infrastructure.Persistence.Models;
 using FluentAssertions;
+using POO.Application.FacturaVentas.Commands;
 
 namespace Poo.Infrastructure.Test
 {
@@ -24,7 +24,7 @@ namespace Poo.Infrastructure.Test
         {
             //arrange
             var productCount = 2;
-            CrearFacturaVentaCommand createCommand = new CrearFacturaVentaCommand(
+            CreateFacturaVentaCommand createCommand = new CreateFacturaVentaCommand(
                 ClienteId : _testFixture.GetCliente().Id,
                 FormaEntrega : FormaEntrega.Envio,
                 CondicionPago : CondicionPago.Qr,
@@ -59,7 +59,7 @@ namespace Poo.Infrastructure.Test
         {
             //arrange
             var productCount = 2;
-            CrearFacturaVentaCommand createCommand = new CrearFacturaVentaCommand(
+            CreateFacturaVentaCommand createCommand = new CreateFacturaVentaCommand(
                 ClienteId: _testFixture.GetCliente().Id,
                 FormaEntrega: FormaEntrega.Envio,
                 CondicionPago: CondicionPago.Qr,
@@ -94,7 +94,7 @@ namespace Poo.Infrastructure.Test
         public void FacturaRepository_ShouldFallarCuandoIdClienteEsInvalido()
         {
             //arrange
-            CrearFacturaVentaCommand createCommand = new CrearFacturaVentaCommand(
+            CreateFacturaVentaCommand createCommand = new CreateFacturaVentaCommand(
                 ClienteId: 99999,
                 FormaEntrega: FormaEntrega.Envio,
                 CondicionPago: CondicionPago.Qr,
@@ -119,7 +119,7 @@ namespace Poo.Infrastructure.Test
         public void FacturaRepository_DeberiaFallarCuandoElProductIdSeaInvalido()
         {
             //arrange
-            CrearFacturaVentaCommand createCommand = new CrearFacturaVentaCommand(
+            CreateFacturaVentaCommand createCommand = new CreateFacturaVentaCommand(
                 ClienteId: _testFixture.GetCliente().Id,
                 FormaEntrega: FormaEntrega.Envio,
                 CondicionPago: CondicionPago.Qr,
