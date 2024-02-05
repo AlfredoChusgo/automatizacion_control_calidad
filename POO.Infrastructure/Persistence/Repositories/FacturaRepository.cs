@@ -22,6 +22,11 @@ namespace POO.Infrastructure.Persistence.Repositories
         {
             ValidarCrearFacturaVentaCommand(command);
 
+            GenerarFactura(command);
+        }
+
+        private void GenerarFactura(CrearFacturaVentaCommand command)
+        {
             double total = 0;
             var facturaVenta = new FacturaVenta()
             {
@@ -31,7 +36,7 @@ namespace POO.Infrastructure.Persistence.Repositories
                 CondicionPago = command.CondicionPago,
                 Impuesto = command.ApplicarIva ? IVA : 0.0,
             };
-            
+
             command.FacturaProductoItems.ForEach(item =>
             {
                 var producto = _context.Productos.FirstOrDefault(e => e.Sku == item.ProductoSku);
@@ -46,7 +51,7 @@ namespace POO.Infrastructure.Persistence.Repositories
 
             command.FacturaServicioItems.ForEach(item =>
             {
-                var servicio= _context.Servicios.FirstOrDefault(e => e.Id == item.ServicioId);
+                var servicio = _context.Servicios.FirstOrDefault(e => e.Id == item.ServicioId);
 
                 total = total + (double)(servicio.Tarifa);
 

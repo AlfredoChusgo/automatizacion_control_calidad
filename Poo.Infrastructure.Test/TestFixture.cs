@@ -21,20 +21,6 @@ namespace Poo.Infrastructure.Test
 
         public TestFixture()
         {
-            //_host = new HostBuilder()
-            //.ConfigureHostConfiguration(config =>
-            //{
-            //    // Set environment to "Test"
-            //    //config.AddEnvironmentVariables();
-            //})
-            //.ConfigureServices((hostContext, services) =>
-            //{
-            //    // Configure services using TestStartup
-            //    new TestStartup().ConfigureServices(services);
-            //})
-            //.Build();
-            
-
             ResetDatabase();
             FacturaRepository = new FacturaRepository(DbContext);
         }

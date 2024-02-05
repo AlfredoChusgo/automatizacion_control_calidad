@@ -22,7 +22,7 @@ namespace Poo.Infrastructure.Test
         [Fact]
         public void FacturaRepository_DeberiaCrearUnaFacturaConIVA()
         {
-
+            //arrange
             var productCount = 2;
             CrearFacturaVentaCommand createCommand = new CrearFacturaVentaCommand(
                 ClienteId : _testFixture.GetCliente().Id,
@@ -41,8 +41,10 @@ namespace Poo.Infrastructure.Test
             double baseTotal = _testFixture.GetProducto().Precio * productCount + _testFixture.GetServicio().Tarifa;
             double totalWithIva = baseTotal + baseTotal * 0.13;
 
+            //act
             _testFixture.FacturaRepository.AddFacturaVenta(createCommand);
             
+            //assert
             var facturaVentaFromDb = _testFixture.DbContext.FacturaVentas.LastOrDefault();
 
             facturaVentaFromDb.Should().NotBeNull();
@@ -55,6 +57,7 @@ namespace Poo.Infrastructure.Test
         [Fact]
         public void FacturaRepository_DeberiaCrearUnaFacturaSinIVA()
         {
+            //arrange
             var productCount = 2;
             CrearFacturaVentaCommand createCommand = new CrearFacturaVentaCommand(
                 ClienteId: _testFixture.GetCliente().Id,
@@ -73,10 +76,12 @@ namespace Poo.Infrastructure.Test
             double baseTotal = _testFixture.GetProducto().Precio * productCount + _testFixture.GetServicio().Tarifa;
             double totalWithIva = baseTotal + baseTotal * 0.13;
 
+            //act
             _testFixture.FacturaRepository.AddFacturaVenta(createCommand);
 
             var facturaVentaFromDb = _testFixture.DbContext.FacturaVentas.LastOrDefault();
 
+            //assert
             facturaVentaFromDb.Should().NotBeNull();
             facturaVentaFromDb.FacturasVentasProductos.Count.Should().Be(1);
             facturaVentaFromDb.FacturasVentasServicios.Count.Should().Be(1);
@@ -88,6 +93,7 @@ namespace Poo.Infrastructure.Test
         [Fact]
         public void FacturaRepository_ShouldFallarCuandoIdClienteEsInvalido()
         {
+            //arrange
             CrearFacturaVentaCommand createCommand = new CrearFacturaVentaCommand(
                 ClienteId: 99999,
                 FormaEntrega: FormaEntrega.Envio,
@@ -102,15 +108,17 @@ namespace Poo.Infrastructure.Test
                 },
                 ApplicarIva: true
             );
-
+            //act
             Action act = ()=> _testFixture.FacturaRepository.AddFacturaVenta(createCommand);
             
+            //assert
             act.Should().Throw<ArgumentException>();            
         }
 
         [Fact]
         public void FacturaRepository_DeberiaFallarCuandoElProductIdSeaInvalido()
         {
+            //arrange
             CrearFacturaVentaCommand createCommand = new CrearFacturaVentaCommand(
                 ClienteId: _testFixture.GetCliente().Id,
                 FormaEntrega: FormaEntrega.Envio,
@@ -125,9 +133,10 @@ namespace Poo.Infrastructure.Test
                 },
                 ApplicarIva: true
             );
-
+            //act
             Action act = () => _testFixture.FacturaRepository.AddFacturaVenta(createCommand);
 
+            //assert
             act.Should().Throw<ArgumentException>();
         }
     }
