@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:poo_spa/src/helpers/key_constant_helper.dart';
 
 import '../clientes/cliente_home_page.dart';
 import '../productos/producto_home_page.dart';
@@ -24,10 +25,11 @@ class _AppHomePageState extends State<AppHomePage> {
 
       body: _pages[_selectedIndex], // Display the selected page
       bottomNavigationBar: BottomNavigationBar(
+        key: K.homePageBottomNavigationBar,
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         items: const [
-          BottomNavigationBarItem(
+          BottomNavigationBarItem(            
             icon: Icon(Icons.home),
             label: 'Productos',
           ),
