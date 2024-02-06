@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:poo_spa/src/blocs/productos/productos_bloc.dart';
 
-import '../models/producto.dart';
+import '../../models/producto.dart';
 
 class ProductoFormPage extends StatelessWidget {
   final String saveButtonText;

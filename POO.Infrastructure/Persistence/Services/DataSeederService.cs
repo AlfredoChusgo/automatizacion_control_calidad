@@ -39,6 +39,9 @@ public class DataSeederService
                 //.RuleFor(b => b.Id, f => f.IndexFaker)
                 .RuleFor(p=>p.Nombre , f=> f.Person.FirstName)
                 .RuleFor(p => p.Direccion, f => f.Person.Address.City)
+                .RuleFor(p => p.NumeroDocumentoIdentidad, f => f.Random.Number(10000000, 99999999))
+                .RuleFor(p=>p.Email, f => f.Person.Email)
+                .RuleFor(p=>p.TipoDocumentoIdentidad,f => f.PickRandom<TipoDocumentoIdentidad>())
                 ;
 
 

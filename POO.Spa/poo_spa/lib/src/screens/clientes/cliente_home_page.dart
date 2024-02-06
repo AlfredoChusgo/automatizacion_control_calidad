@@ -1,14 +1,14 @@
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:poo_spa/src/blocs/productos/productos_bloc.dart';
-import 'package:poo_spa/src/repositories/producto_repository.dart';
+import 'package:poo_spa/src/blocs/clientes/clientes_bloc.dart';
+import 'package:poo_spa/src/repositories/cliente_repository.dart';
 import 'package:barcode/barcode.dart';
-import 'package:poo_spa/src/screens/producto_form_page.dart';
-import '../models/producto.dart';
+import 'package:poo_spa/src/screens/clientes/cliente_form_page.dart';
+import '../../models/cliente.dart';
 
-class ProductoHomePage extends StatelessWidget {
-  const ProductoHomePage({super.key});
+class ClienteHomePage extends StatelessWidget {
+  const ClienteHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +18,14 @@ class ProductoHomePage extends StatelessWidget {
     // Whenever the user updates their settings, the MaterialApp is rebuilt.
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Productos'),
+        title: const Text('Clientes'),
         actions: [
           // Add your ActionButton here
           IconButton(
             icon: Icon(Icons.update),
             onPressed: () {
               // Add your action button logic here
-              context.read<ProductosBloc>().add(LoadProductosEvent());
+              context.read<ClientesBloc>().add(LoadClientesEvent());
             },
           ),
         ],
@@ -33,25 +33,25 @@ class ProductoHomePage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // Add your action here
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => ProductoFormPage(
-                      isReadOnly: false,
-                      producto: const Producto.empty(),
-                      saveButtonText: "Guardar",
-                      callback: (producto) {
-                        context
-                            .read<ProductosBloc>()
-                            .add(AddProductoEvent(producto));
-                      },
-                    )),
-          );
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(
+          //       builder: (context) => ClienteFormPage(
+          //             isReadOnly: false,
+          //             cliente: Cliente.empty(),
+          //             saveButtonText: "Guardar",
+          //             callback: (cliente) {
+          //               context
+          //                   .read<ClientesBloc>()
+          //                   .add(AddClienteEvent(cliente));
+          //             },
+          //           )),
+          // );
         },
         child: const Icon(Icons.add),
       ),
       body: Center(
-          child: BlocListener<ProductosBloc, ProductosState>(
+          child: BlocListener<ClientesBloc, ClientesState>(
         listener: (context, state) {
           // if (state is PacienteActionResponse) {
           //   String? message = state.message;
@@ -96,7 +96,7 @@ class ProductoHomePage extends StatelessWidget {
             );
           }
         },
-        child: BlocBuilder<ProductosBloc, ProductosState>(
+        child: BlocBuilder<ClientesBloc, ClientesState>(
           builder: (context, state) {
             if (state.isLoading) {
               return const CircularProgressIndicator();
@@ -107,18 +107,18 @@ class ProductoHomePage extends StatelessWidget {
                 // Add a SizedBox to define the space between items
                 return const Divider(height: 20); // Adjust the height as needed
               },
-              itemCount: state.productos.length,
+              itemCount: state.clientes.length,
               itemBuilder: (context, index) {
-                var producto = state.productos[index];
+                var cliente = state.clientes[index];
                 return ListTile(
-                  title: Text(producto.nombre),
-                  subtitle: Text(producto.getDescription()),
-                  leading: BarcodeWidget(
-                    barcode: Barcode.code128(),
-                    data: producto.codigoBarra,
-                    width: 150,
-                    height: 50,
-                  ),
+                  title: Text(cliente.nombre),
+                  subtitle: Text(cliente.getDescription()),
+                  // leading: BarcodeWidget(
+                  //   barcode: Barcode.code128(),
+                  //   data: cliente.codigoBarra,
+                  //   width: 150,
+                  //   height: 50,
+                  // ),
                   trailing: PopupMenuButton<String>(
                     tooltip: "Mostrar Menu",
                     itemBuilder: (context) => [
@@ -147,41 +147,43 @@ class ProductoHomePage extends StatelessWidget {
                     onSelected: (String value) {
                       // Handle the selected action
                       if (value == 'info') {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ProductoFormPage(
-                                    isReadOnly: true,
-                                    producto: producto,
-                                    saveButtonText: "",
-                                    callback: (producto) {
-                                      // context.read<ProductosBloc>().add(
-                                      //     EditProductoEvent(
-                                      //         producto, producto.sku));
-                                    },
-                                  )),
-                        );
-                      } else if (value == 'edit') {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ProductoFormPage(
-                                    isReadOnly: false,
-                                    producto: producto,
-                                    saveButtonText: "Editar",
-                                    callback: (producto) {
-                                      context.read<ProductosBloc>().add(
-                                          EditProductoEvent(
-                                              producto, producto.sku));
-                                    },
-                                  )),
-                        );
-                        // Add your action for Edit
-                      } else if (value == 'delete') {
-                        context
-                            .read<ProductosBloc>()
-                            .add(DeleteProductoEvent(producto.sku));
-                      }
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //       builder: (context) => ClienteFormPage(
+                        //             isReadOnly: true,
+                        //             cliente: cliente,
+                        //             saveButtonText: "",
+                        //             callback: (cliente) {
+                        //               // context.read<ClientesBloc>().add(
+                        //               //     EditClienteEvent(
+                        //               //         cliente, cliente.sku));
+                        //             },
+                        //           )),
+                        // );
+                      } 
+                      
+                      // else if (value == 'edit') {
+                      //   Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => ClienteFormPage(
+                      //               isReadOnly: false,
+                      //               cliente: cliente,
+                      //               saveButtonText: "Editar",
+                      //               callback: (cliente) {
+                      //                 context.read<ClientesBloc>().add(
+                      //                     EditClienteEvent(
+                      //                         cliente, cliente.id));
+                      //               },
+                      //             )),
+                      //   );
+                      //   // Add your action for Edit
+                      // } else if (value == 'delete') {
+                      //   context
+                      //       .read<ClientesBloc>()
+                      //       .add(DeleteClienteEvent(cliente.id));
+                      // }
                     },
                   ),
                 );

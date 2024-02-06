@@ -3,19 +3,6 @@ using POO.Domain;
 
 namespace POO.Application.FacturaVentas.Commands;
 
-//public record CreateFacturaVentaCommand(
-//string Sku,
-//string SkuAlternante,
-//string SkuFabricante,
-//string Nombre,
-//string NombreExtranjero,
-//string CodigoGrupo,
-//decimal Peso,
-//double Precio,
-//string UnidadMedida,
-//string CodigoBarra,
-//string NombreFabricante,
-//string NombreProveedor) : IRequest<FacturaVenta>;
 
 public record CreateFacturaVentaCommand(
 int ClienteId,
@@ -31,19 +18,3 @@ int Cantidad
     );
 
 public record FacturaServicioItem(int ServicioId);
-
-//public record UpdateFacturaVentaCommand(
-//string Sku,
-//string SkuAlternante,
-//string SkuFabricante,
-//string Nombre,
-//string NombreExtranjero,
-//string CodigoGrupo,
-//decimal Peso,
-//double Precio,
-//string UnidadMedida,
-//string CodigoBarra,
-//string NombreFabricante,
-//string NombreProveedor) : IRequest<FacturaVenta>;
-
-//public record DeleteFacturaVentaCommand(string Sku) : IRequest<FacturaVenta>;
