@@ -1,7 +1,7 @@
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:poo_spa/src/blocs/productos_bloc.dart';
+import 'package:poo_spa/src/blocs/productos/productos_bloc.dart';
 import 'package:poo_spa/src/repositories/producto_repository.dart';
 import 'package:barcode/barcode.dart';
 import 'package:poo_spa/src/screens/producto_form_page.dart';

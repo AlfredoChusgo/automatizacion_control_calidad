@@ -2,8 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-import '../models/producto.dart';
-import '../repositories/producto_repository.dart';
+import '../../models/producto.dart';
+import '../../repositories/producto_repository.dart';
 
 part 'productos_event.dart';
 part 'productos_state.dart';
