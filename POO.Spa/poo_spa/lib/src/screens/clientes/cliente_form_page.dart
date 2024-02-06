@@ -1,264 +1,252 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:poo_spa/src/blocs/clientes/clientes_bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:poo_spa/src/blocs/clientes/clientes_bloc.dart';
 
-// import '../../models/cliente.dart';
+import '../../models/cliente.dart';
 
-// class ClienteFormPage extends StatelessWidget {
-//   final String saveButtonText;
-//   final Cliente cliente;
-//   final bool isReadOnly;
-//   final void Function(Cliente cliente) callback;
+class ClienteFormPage extends StatelessWidget {
+  final String saveButtonText;
+  final Cliente cliente;
+  final bool isReadOnly;
+  final void Function(Cliente cliente) callback;
 
-//   const ClienteFormPage(
-//       {super.key, required this.cliente,required this.isReadOnly, required this.saveButtonText, required this.callback});
+  const ClienteFormPage(
+      {super.key, required this.cliente,required this.isReadOnly, required this.saveButtonText, required this.callback});
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//         appBar: AppBar(
-//           title: const Text('Formulario Cliente'),
-//         ),
-//         body: BlocListener<ClientesBloc, ClientesState>(
-//           listener: (context, state) {
-//             // if (state is EstadiaPacientedError) {
-//             //   String message = state.message;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text('Formulario Cliente'),
+        ),
+        body: BlocListener<ClientesBloc, ClientesState>(
+          listener: (context, state) {
+            // if (state is EstadiaPacientedError) {
+            //   String message = state.message;
 
-//             //   Flushbar(
-//             //     duration: const Duration(seconds: 2),
-//             //     title: "Accion",
-//             //     message: message,
-//             //   ).show(context);
-//             // }
-//             // if (state is EstadiaPacienteAddedSuccessfully ||
-//             //     state is EstadiaPacienteUpdatedSuccessfully ||
-//             //     state is EstadiaPacienteDeletedSuccessfully) {
-//             //   Navigator.pop(context);
-//             // }
-//           },
-//           child: BlocBuilder<ClientesBloc, ClientesState>(
-//             builder: (context, state) {
-//               if (state.isLoading) {
-//                 return const CircularProgressIndicator();
-//               }
-//               return ClienteForm(state: cliente, isReadOnly: isReadOnly, saveButtonText: saveButtonText, callback: callback);
-//             },
-//           ),
-//         ));
-//   }
-// }
+            //   Flushbar(
+            //     duration: const Duration(seconds: 2),
+            //     title: "Accion",
+            //     message: message,
+            //   ).show(context);
+            // }
+            // if (state is EstadiaPacienteAddedSuccessfully ||
+            //     state is EstadiaPacienteUpdatedSuccessfully ||
+            //     state is EstadiaPacienteDeletedSuccessfully) {
+            //   Navigator.pop(context);
+            // }
+          },
+          child: BlocBuilder<ClientesBloc, ClientesState>(
+            builder: (context, state) {
+              if (state.isLoading) {
+                return const CircularProgressIndicator();
+              }
+              return ClienteForm(state: cliente, isReadOnly: isReadOnly, saveButtonText: saveButtonText, callback: callback);
+            },
+          ),
+        ));
+  }
+}
 
-// class ClienteForm extends StatefulWidget {
-//   final Cliente state;
-//   final String saveButtonText;
-//   final bool isReadOnly;
-//   final void Function(Cliente cliente) callback;
+class ClienteForm extends StatefulWidget {
+  final Cliente state;
+  final String saveButtonText;
+  final bool isReadOnly;
+  final void Function(Cliente cliente) callback;
 
-//   const ClienteForm(
-//       {required this.state,
-//       super.key,
-//       required this.isReadOnly,
-//       required this.saveButtonText,
-//       required this.callback});
+  const ClienteForm(
+      {required this.state,
+      super.key,
+      required this.isReadOnly,
+      required this.saveButtonText,
+      required this.callback});
 
-//   @override
-//   State<ClienteForm> createState() => _ClienteFormState();
-// }
+  @override
+  State<ClienteForm> createState() => _ClienteFormState();
+}
 
-// class _ClienteFormState extends State<ClienteForm> {
-//   late final TextEditingController skuController;
-//   late final TextEditingController skuAlternanteController;
-//   late final TextEditingController skuFabricanteController;
-//   late final TextEditingController nombreController;
-//   late final TextEditingController nombreExtranjeroController;
-//   late final TextEditingController codigoGrupoController;
-//   late final TextEditingController pesoController;
-//   late final TextEditingController precioController;
-//   late final TextEditingController unidadMedidaController;
-//   late final TextEditingController codigoBarraController;
-//   late final TextEditingController nombreFabricanteController;
-//   late final TextEditingController nombreProveedorController;
+class _ClienteFormState extends State<ClienteForm> {
+  // late final TextEditingController skuController;
+  late final TextEditingController nombreController;
 
-//   _ClienteFormState();
-//   @override
-//   void initState() {
-//     skuController = TextEditingController(text: widget.state.sku);
-//     skuAlternanteController =
-//         TextEditingController(text: widget.state.skuAlternante);
-//     skuFabricanteController =
-//         TextEditingController(text: widget.state.skuFabricante);
-//     nombreController = TextEditingController(text: widget.state.nombre);
-//     nombreExtranjeroController =
-//         TextEditingController(text: widget.state.nombreExtranjero);
-//     codigoGrupoController =
-//         TextEditingController(text: widget.state.codigoGrupo);
-//     pesoController = TextEditingController(text: widget.state.peso.toString());
-//     precioController =
-//         TextEditingController(text: widget.state.precio.toString());
-//     unidadMedidaController =
-//         TextEditingController(text: widget.state.unidadMedida);
-//     codigoBarraController =
-//         TextEditingController(text: widget.state.codigoBarra);
-//     nombreFabricanteController =
-//         TextEditingController(text: widget.state.nombreFabricante);
-//     nombreProveedorController =
-//         TextEditingController(text: widget.state.nombreProveedor);
+  late final TextEditingController direccionController;
+  late final TextEditingController numeroDocumentoIdentidadController;
+  
+  late final TextEditingController emailController;
+  //late final TextEditingController tipoDocumentoIdentidadController;
+  late final RadioTipoDocumentoIdentidad radioTipoDocumentoIdentidad;
+  _ClienteFormState();
+  @override
+  void initState() {
+    //skuController = TextEditingController(text: widget.state.sku);
+    nombreController = TextEditingController(text: widget.state.nombre);
 
-//     super.initState();
-//   }
+    direccionController =
+        TextEditingController(text: widget.state.direccion);
+    numeroDocumentoIdentidadController =
+        TextEditingController(text: widget.state.numeroDocumentoIdentidad.toString());
+    
+    emailController =
+        TextEditingController(text: widget.state.email);
+    //tipoDocumentoIdentidadController =
+      //  TextEditingController(text: widget.state.tipoDocumentoIdentidad.toString());
+    
+    radioTipoDocumentoIdentidad = RadioTipoDocumentoIdentidad();  
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return SingleChildScrollView(
-//       child: Padding(
-//         padding: const EdgeInsets.all(16.0),
-//         child: Column(
-//           children: [
-//             Text(
-//               "Cliente",
-//               style: Theme.of(context).textTheme.headlineSmall,
-//             ),
-//             FloatingActionButton(
-//             onPressed: () {
-//               // Add your floating action button logic here
-//               var productFake = Cliente.fake();
-//               skuController.text = productFake.sku ;
-//               skuAlternanteController.text = productFake.skuAlternante ;
-//               skuFabricanteController.text = productFake.skuFabricante ;
-//               nombreController.text = productFake.nombre ;
-//               nombreExtranjeroController.text = productFake.nombreExtranjero ;
-//               codigoGrupoController.text = productFake.codigoGrupo ;
-//               pesoController.text = productFake.peso.toString();
-//               precioController.text = productFake.precio.toString() ;
-//               unidadMedidaController.text = productFake.unidadMedida ;
-//               codigoBarraController.text = productFake.codigoBarra ;
-//               nombreFabricanteController.text = productFake.nombreFabricante ;
-//               nombreProveedorController.text = productFake.nombreProveedor;
-//             },
-//             child: Icon(Icons.question_mark),
-//           ),
-//             const SizedBox(height: 16.0),
-//             TextFormField(
-//               readOnly: widget.isReadOnly,
-//               controller: skuController,
-//               decoration: const InputDecoration(labelText: 'sku'),
-//             ),
-//             const SizedBox(height: 16.0),
-//             TextFormField(
-//               readOnly: widget.isReadOnly,
-//               minLines: 1,
-//               maxLines: 2,
-//               controller: skuAlternanteController,
-//               decoration: const InputDecoration(labelText: 'skuAlternante'),
-//             ),
-//             const SizedBox(height: 16.0),
-//             TextFormField(
-//               readOnly: widget.isReadOnly,
-//               minLines: 1,
-//               maxLines: 2,
-//               controller: skuFabricanteController,
-//               decoration: const InputDecoration(labelText: 'skuFabricante'),
-//             ),
-//             const SizedBox(height: 16.0),
-//             TextFormField(
-//               readOnly: widget.isReadOnly,
-//               minLines: 1,
-//               maxLines: 2,
-//               controller: nombreController,
-//               decoration: const InputDecoration(labelText: 'nombre'),
-//             ),
-//             const SizedBox(height: 16.0),
-//             TextFormField(
-//               readOnly: widget.isReadOnly,
-//               minLines: 1,
-//               maxLines: 2,
-//               controller: nombreExtranjeroController,
-//               decoration: const InputDecoration(labelText: 'nombreExtranjero'),
-//             ),
-//             const SizedBox(height: 16.0),
-//             TextFormField(
-//               readOnly: widget.isReadOnly,
-//               minLines: 1,
-//               maxLines: 2,
-//               controller: codigoGrupoController,
-//               decoration: const InputDecoration(labelText: 'codigoGrupo'),
-//             ),
-//             const SizedBox(height: 16.0),
-//             TextFormField(
-//               readOnly: widget.isReadOnly,
-//               minLines: 1,
-//               maxLines: 2,
-//               controller: pesoController,
-//               decoration: const InputDecoration(labelText: 'peso'),
-//             ),
-//             const SizedBox(height: 16.0),
-//             TextFormField(
-//               readOnly: widget.isReadOnly,
-//               minLines: 1,
-//               maxLines: 2,
-//               controller: precioController,
-//               keyboardType: TextInputType.number,
-//               decoration: const InputDecoration(labelText: 'precio'),
-//             ),
-//             const SizedBox(height: 16.0),
-//             TextFormField(
-//               readOnly: widget.isReadOnly,
-//               minLines: 1,
-//               maxLines: 2,
-//               controller: unidadMedidaController,
-//               decoration: const InputDecoration(labelText: 'unidadMedida'),
-//             ),
-//             const SizedBox(height: 16.0),
-//             TextFormField(
-//               readOnly: widget.isReadOnly,
-//               minLines: 1,
-//               maxLines: 2,
-//               controller: codigoBarraController,
-//               decoration: const InputDecoration(labelText: 'codigoBarra'),
-//             ),
-//             const SizedBox(height: 16.0),
-//             TextFormField(
-//               readOnly: widget.isReadOnly,
-//               minLines: 1,
-//               maxLines: 2,
-//               controller: nombreFabricanteController,
-//               decoration: const InputDecoration(labelText: 'nombreFabricante'),
-//             ),
-//             const SizedBox(height: 16.0),
-//             TextFormField(
-//               readOnly: widget.isReadOnly,
-//               minLines: 1,
-//               maxLines: 2,
-//               controller: nombreProveedorController,
-//               decoration: const InputDecoration(labelText: 'nombreProveedor'),
-//             ),
-//             const SizedBox(height: 16.0),
-//             if (!widget.isReadOnly)
-//               ElevatedButton(
-//                 onPressed: () {
+    super.initState();
+  }
 
-//                   Cliente estadiaPaciente = const Cliente.empty()
-//                       .copyWith(
-//                           sku: skuController.text,
-//                           skuAlternante: skuAlternanteController.text,
-//                           skuFabricante : skuFabricanteController.text,
-//                           nombre : nombreController.text,
-//                           nombreExtranjero: nombreExtranjeroController.text,
-//                           codigoGrupo: codigoGrupoController.text,
-//                           peso: double.parse(pesoController.text),
-//                           precio: double.parse(precioController.text),
-//                           unidadMedida: unidadMedidaController.text,
-//                           codigoBarra: codigoBarraController.text,
-//                           nombreFabricante: nombreFabricanteController.text,
-//                           nombreProveedor: nombreProveedorController.text,
-//                           );
-//                   widget.callback(estadiaPaciente);
-//                 },
-//                 child: Text(widget.saveButtonText),
-//               ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            Text(
+              "Cliente",
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
+            FloatingActionButton(
+            onPressed: () {
+              // Add your floating action button logic here
+              var productFake = Cliente.fake();
+              nombreController.text = productFake.nombre ;
+              direccionController.text = productFake.direccion ;
+              numeroDocumentoIdentidadController.text = productFake.numeroDocumentoIdentidad.toString() ;              
+              emailController.text = productFake.email ;
+              //tipoDocumentoIdentidadController.text = productFake.tipoDocumentoIdentidad.toString() ;
+            },
+            child: Icon(Icons.question_mark),
+          ),
+            const SizedBox(height: 16.0),
+            // TextFormField(
+            //   readOnly: widget.isReadOnly,
+            //   controller: skuController,
+            //   decoration: const InputDecoration(labelText: 'sku'),
+            // ),
+            TextFormField(
+              readOnly: widget.isReadOnly,
+              minLines: 1,
+              maxLines: 2,
+              controller: nombreController,
+              decoration: const InputDecoration(labelText: 'Nombre'),
+            ),
+            const SizedBox(height: 16.0),
+            TextFormField(
+              readOnly: widget.isReadOnly,
+              minLines: 1,
+              maxLines: 2,
+              controller: direccionController,
+              decoration: const InputDecoration(labelText: 'Direccion'),
+            ),
+            const SizedBox(height: 16.0),
+            TextFormField(
+              readOnly: widget.isReadOnly,
+              minLines: 1,
+              maxLines: 2,
+              controller: numeroDocumentoIdentidadController,
+              keyboardType: TextInputType.number,
+              decoration: const InputDecoration(labelText: 'Numero Documento Identidad'),
+            ),
+            const SizedBox(height: 16.0),
+            TextFormField(
+              readOnly: widget.isReadOnly,
+              minLines: 1,
+              maxLines: 2,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Ingrese un email ';
+                }
+                if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                    .hasMatch(value)) {
+                  return 'Ingrese un email valido';
+                }
+                return null;
+              },
+              controller: emailController,
+              keyboardType: TextInputType.emailAddress,
+              decoration: const InputDecoration(labelText: 'Email'),
+            ),
+            const SizedBox(height: 16.0),
+            // TextFormField(
+            //   readOnly: widget.isReadOnly,
+            //   minLines: 1,
+            //   maxLines: 2,
+            //   controller: tipoDocumentoIdentidadController,
+            //   decoration: const InputDecoration(labelText: 'codigoGrupo'),
+            // ),
+            Center(child: radioTipoDocumentoIdentidad),
+            const SizedBox(height: 16.0),
+            
+            if (!widget.isReadOnly)
+              ElevatedButton(
+                onPressed: () {
+
+                  Cliente model = Cliente.empty()
+                      .copyWith(
+                          //sku: skuController.text,
+                          direccion: direccionController.text,
+                          numeroDocumentoIdentidad : int.parse(numeroDocumentoIdentidadController.text),
+                          nombre : nombreController.text,
+                          email: emailController.text,
+                          tipoDocumentoIdentidad: radioTipoDocumentoIdentidad.getSelectedValue()
+                          );
+                  widget.callback(model);
+                },
+                child: Text(widget.saveButtonText),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+class RadioTipoDocumentoIdentidad extends StatefulWidget {
+  RadioTipoDocumentoIdentidad({super.key});
+  TipoDocumentoIdentidad? character = TipoDocumentoIdentidad.CedulaIdentidad;
+  @override
+  State<RadioTipoDocumentoIdentidad> createState() => _RadioTipoDocumentoIdentidadState();
+
+   TipoDocumentoIdentidad? getSelectedValue() {
+    return character;
+  }
+}
+
+class _RadioTipoDocumentoIdentidadState extends State<RadioTipoDocumentoIdentidad> {
+  
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        ListTile(
+          title: const Text('Cedula Identidad'),
+          leading: Radio<TipoDocumentoIdentidad>(
+            value: TipoDocumentoIdentidad.CedulaIdentidad,
+            groupValue: widget.character,
+            onChanged: (TipoDocumentoIdentidad? value) {
+              setState(() {
+                widget.character = value;
+              });
+            },
+          ),
+        ),
+        ListTile(
+          title: const Text('Pasaporte'),
+          leading: Radio<TipoDocumentoIdentidad>(
+            value: TipoDocumentoIdentidad.Pasaporte,
+            groupValue: widget.character,
+            onChanged: (TipoDocumentoIdentidad? value) {
+              setState(() {
+                widget.character = value;
+              });
+            },
+          ),
+        ),
+      ],
+    );
+  }
+}

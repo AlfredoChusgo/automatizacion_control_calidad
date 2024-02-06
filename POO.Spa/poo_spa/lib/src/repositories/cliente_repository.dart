@@ -19,7 +19,7 @@ class ClientesRepository  {
     }
   }
 
-  Future<Cliente> createCliente(Cliente cliente) async {
+  Future<void> createCliente(Cliente cliente) async {
     final response = await http.post(
       Uri.parse(baseUrl),
       headers: {'Content-Type': 'application/json'},
@@ -27,10 +27,8 @@ class ClientesRepository  {
       body: json.encode(cliente.toJson()),
     );
 
-    if (response.statusCode == 201) {
-      return Cliente.fromJson(json.decode(response.body));
-    } else {
-      throw Exception('Failed to create cliente');
+    if (response.statusCode != 200) {
+      throw Exception('Failed to create cliente');      
     }
   }
 

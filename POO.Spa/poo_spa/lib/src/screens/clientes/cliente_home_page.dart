@@ -32,21 +32,21 @@ class ClienteHomePage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Add your action here
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //       builder: (context) => ClienteFormPage(
-          //             isReadOnly: false,
-          //             cliente: Cliente.empty(),
-          //             saveButtonText: "Guardar",
-          //             callback: (cliente) {
-          //               context
-          //                   .read<ClientesBloc>()
-          //                   .add(AddClienteEvent(cliente));
-          //             },
-          //           )),
-          // );
+          //Add your action here
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ClienteFormPage(
+                      isReadOnly: false,
+                      cliente: Cliente.empty(),
+                      saveButtonText: "Guardar",
+                      callback: (cliente) {
+                        context
+                            .read<ClientesBloc>()
+                            .add(AddClienteEvent(cliente));
+                      },
+                    )),
+          );
         },
         child: const Icon(Icons.add),
       ),

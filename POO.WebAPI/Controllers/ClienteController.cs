@@ -40,7 +40,7 @@ public class ClientesController : ControllerBase
         };
 
         DbContext.Clientes.Add(newCliente);
-
+        DbContext.SaveChanges();
         return Ok();
     }
 }

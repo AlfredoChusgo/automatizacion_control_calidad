@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:faker/faker.dart';
 
 class Cliente extends Equatable {
   final int id;
@@ -52,7 +53,8 @@ class Cliente extends Equatable {
       'direccion': direccion,
       'numeroDocumentoIdentidad': numeroDocumentoIdentidad,
       'email': email,
-      'tipoDocumentoIdentidad': tipoDocumentoIdentidad.toString().split('.').last,
+      //'tipoDocumentoIdentidad': tipoDocumentoIdentidad.toString().split('.').last,
+      'tipoDocumentoIdentidad': tipoDocumentoIdentidad.index,
     };
   }
 
@@ -90,6 +92,19 @@ class Cliente extends Equatable {
 
   // Empty default constructor
   Cliente.empty() : id = 0, nombre = '', direccion = '', numeroDocumentoIdentidad = 0, email = '', tipoDocumentoIdentidad = TipoDocumentoIdentidad.CedulaIdentidad;
+
+  factory Cliente.fake() {
+    final faker = Faker();
+    return Cliente(
+      //sku: faker.guid.guid(),
+      id: 0,
+      nombre: faker.food.dish(),
+      direccion: faker.address.streetAddress(),
+      numeroDocumentoIdentidad: faker.randomGenerator.integer(999999,min: 100000),
+      email: faker.internet.email(),
+      tipoDocumentoIdentidad: faker.randomGenerator.element<TipoDocumentoIdentidad>(TipoDocumentoIdentidad.values)      
+    );
+  }
 }
 
 enum TipoDocumentoIdentidad {
