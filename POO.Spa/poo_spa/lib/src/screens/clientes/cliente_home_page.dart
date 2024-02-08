@@ -2,6 +2,7 @@ import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:poo_spa/src/blocs/clientes/clientes_bloc.dart';
+import 'package:poo_spa/src/helpers/key_constant_helper.dart';
 import 'package:poo_spa/src/repositories/cliente_repository.dart';
 import 'package:barcode/barcode.dart';
 import 'package:poo_spa/src/screens/clientes/cliente_form_page.dart';
@@ -31,6 +32,7 @@ class ClienteHomePage extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
+        key: K.clienteHomePageAddClienteFloatingActionButton,
         onPressed: () {
           //Add your action here
           Navigator.push(
@@ -111,6 +113,7 @@ class ClienteHomePage extends StatelessWidget {
               itemBuilder: (context, index) {
                 var cliente = state.clientes[index];
                 return ListTile(
+                  key: K.clienteListItem(cliente.numeroDocumentoIdentidad),
                   title: Text(cliente.nombre),
                   subtitle: Text(cliente.getDescription()),
                   // leading: BarcodeWidget(

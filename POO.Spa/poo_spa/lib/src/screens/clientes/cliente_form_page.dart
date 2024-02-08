@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:poo_spa/src/blocs/clientes/clientes_bloc.dart';
+import 'package:poo_spa/src/helpers/key_constant_helper.dart';
 
 import '../../models/cliente.dart';
 
@@ -120,12 +121,8 @@ class _ClienteFormState extends State<ClienteForm> {
             child: Icon(Icons.question_mark),
           ),
             const SizedBox(height: 16.0),
-            // TextFormField(
-            //   readOnly: widget.isReadOnly,
-            //   controller: skuController,
-            //   decoration: const InputDecoration(labelText: 'sku'),
-            // ),
             TextFormField(
+              key: K.clienteNombreFormField,
               readOnly: widget.isReadOnly,
               minLines: 1,
               maxLines: 2,
@@ -134,6 +131,7 @@ class _ClienteFormState extends State<ClienteForm> {
             ),
             const SizedBox(height: 16.0),
             TextFormField(
+              key: K.clienteDireccionFormField,
               readOnly: widget.isReadOnly,
               minLines: 1,
               maxLines: 2,
@@ -143,6 +141,7 @@ class _ClienteFormState extends State<ClienteForm> {
             const SizedBox(height: 16.0),
             TextFormField(
               readOnly: widget.isReadOnly,
+              key: K.clienteNumeroDocumentoIdentidadFormField,
               minLines: 1,
               maxLines: 2,
               controller: numeroDocumentoIdentidadController,
@@ -152,6 +151,7 @@ class _ClienteFormState extends State<ClienteForm> {
             const SizedBox(height: 16.0),
             TextFormField(
               readOnly: widget.isReadOnly,
+              key: K.clienteEmailFormField,
               minLines: 1,
               maxLines: 2,
               validator: (value) {
@@ -223,8 +223,9 @@ class _RadioTipoDocumentoIdentidadState extends State<RadioTipoDocumentoIdentida
     return Column(
       children: <Widget>[
         ListTile(
-          title: const Text('Cedula Identidad'),
+          title: const Text('Cedula Identidad'),          
           leading: Radio<TipoDocumentoIdentidad>(
+            key: K.clienteTipoDocumentoIdentidadCedulaIdentidadFormField,
             value: TipoDocumentoIdentidad.CedulaIdentidad,
             groupValue: widget.character,
             onChanged: (TipoDocumentoIdentidad? value) {
@@ -235,9 +236,10 @@ class _RadioTipoDocumentoIdentidadState extends State<RadioTipoDocumentoIdentida
           ),
         ),
         ListTile(
-          title: const Text('Pasaporte'),
+          title: const Text('Pasaporte'),          
           leading: Radio<TipoDocumentoIdentidad>(
             value: TipoDocumentoIdentidad.Pasaporte,
+            key: K.clientetipoDocumentoIdentidadPasaporteFormField,
             groupValue: widget.character,
             onChanged: (TipoDocumentoIdentidad? value) {
               setState(() {
