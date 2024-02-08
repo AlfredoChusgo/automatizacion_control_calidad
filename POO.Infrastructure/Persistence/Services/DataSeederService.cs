@@ -54,10 +54,20 @@ public class DataSeederService
             var productos = _context.Productos;
             var clientes =  _context.Clientes;
             //facturaVentaProducto
-            var facturaVentaProductoFaker = new Faker<FacturaVentaProducto>()
+            //var facturaVentaProductoFaker = new Faker<FacturaVentaProducto>()
             //.RuleFor(x => x.ProductoSku, f => f.Random.AlphaNumeric(5))
-            .RuleFor(x => x.Producto, f=> f.PickRandom<Producto>(productos))
-            .RuleFor(x => x.Cantidad, f => f.Random.Int(1, 10));
+            //.RuleFor(x => x.Producto, f=> f.PickRandom<Producto>(productos))
+            //.RuleFor(x => x.Cantidad, f => f.Random.Int(1, 10));
+            //var facturaVentaProducto = new List<FacturaVentaProducto>(){
+            //new FacturaVentaProducto
+            //{
+            //    ProductoSku = productos.FirstOrDefault().Sku
+            //},
+            //new FacturaVentaProducto
+            //{
+            //    ProductoSku = productos.FirstOrDefault().Sku
+            //}
+            //};
 
             //facturaVenta
             var fakerFacturaVentas = new Faker<FacturaVenta>("es")
@@ -67,7 +77,7 @@ public class DataSeederService
                 Fecha = f.Date.Between(DateTime.Now.AddDays(1), DateTime.Now.AddDays(300)),
                 FormaEntrega = f.PickRandom<FormaEntrega>(),
                 CondicionPago= f.PickRandom<CondicionPago>(),
-                FacturasVentasProductos = facturaVentaProductoFaker.Generate(1),
+                FacturasVentasProductos = productos.Take(4).Select(e=> new FacturaVentaProducto { ProductoSku = e.Sku, Producto = e, Cantidad = 5}).ToList(),
                 Impuesto = f.Random.Double(0.01, 0.15),
                 Total = f.Random.Double(0.0,6000.0)
             })

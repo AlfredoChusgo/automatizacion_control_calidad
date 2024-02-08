@@ -40,18 +40,13 @@ namespace POO.Infrastructure.Persistence
 
             //modelBuilder.Entity<FacturaVenta>()
             //.HasKey(v => v.Id);
-            modelBuilder.Entity<FacturaVentaProducto>()
-            .HasKey(fvp => new { fvp.FacturaVentaId, fvp.ProductoSku });
+            
 
             modelBuilder.Entity<FacturaVenta>()
                 .HasOne(v => v.Cliente)
                 .WithMany(c => c.FacturaVentas)
                 .HasForeignKey(v => v.ClienteId);
 
-            modelBuilder.Entity<FacturaVenta>()
-                .HasOne(v => v.Cliente)
-                .WithMany(c => c.FacturaVentas)
-                .HasForeignKey(v => v.ClienteId);
 
             modelBuilder.Entity<FacturaVenta>()
             .Property(iv => iv.FormaEntrega)
@@ -62,6 +57,8 @@ namespace POO.Infrastructure.Persistence
             .HasConversion<string>();
 
             ///
+            modelBuilder.Entity<FacturaVentaProducto>()
+            .HasKey(fvp => new { fvp.FacturaVentaId, fvp.ProductoSku });
 
             modelBuilder.Entity<FacturaVentaProducto>()
             .HasOne(fvp => fvp.FacturaVenta)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace POO.Domain;
@@ -16,6 +17,7 @@ public class FacturaVenta
     public FormaEntrega FormaEntrega { get; set; }
     public CondicionPago CondicionPago {  get; set; }
 
+    
     public List<FacturaVentaProducto> FacturasVentasProductos { get; set; } = new List<FacturaVentaProducto>();
 
     public double Impuesto { get; set; }
@@ -38,6 +40,7 @@ public enum CondicionPago
 public class FacturaVentaProducto
 {
     public int FacturaVentaId { get; set; }
+    
     public FacturaVenta FacturaVenta { get; set; }
 
     public string ProductoSku { get; set; }

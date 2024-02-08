@@ -86,7 +86,14 @@ namespace POO.Infrastructure.Persistence.Repositories
 
         public IEnumerable<FacturaVenta> GetAll()
         {
-            return _context.FacturaVentas.ToList();
+            return _context.FacturaVentas
+                .AsNoTracking()
+                .AsQueryable()
+                .Include(e=>e.Cliente)
+                .Include(e=>e.FacturasVentasProductos)
+                .ThenInclude(fvp => fvp.Producto)
+                //.Include(e=>e.Cliente)
+                .ToList();
         }
     }
 }

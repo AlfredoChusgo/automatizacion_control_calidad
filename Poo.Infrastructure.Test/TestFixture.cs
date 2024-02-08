@@ -73,8 +73,8 @@ namespace Poo.Infrastructure.Test
 
             var clientes = new List<Cliente>
             {
-            new() { Nombre = "Cliente1", Direccion = "Direccion1" },
-            new() { Nombre = "Cliente2", Direccion = "Direccion2" },
+            new() { Nombre = "Cliente1", Direccion = "Direccion1" , Email = "ach@gmail.com", TipoDocumentoIdentidad = TipoDocumentoIdentidad.CedulaIdentidad},
+            new() { Nombre = "Cliente2", Direccion = "Direccion2" ,Email = "ach@gmail.com", TipoDocumentoIdentidad = TipoDocumentoIdentidad.CedulaIdentidad},
             // Add more seed data as needed
             };
             DbContext.Clientes.AddRange(clientes);
