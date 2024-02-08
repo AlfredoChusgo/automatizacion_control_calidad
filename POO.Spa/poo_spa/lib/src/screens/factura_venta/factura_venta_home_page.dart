@@ -67,6 +67,7 @@ class FacturaVentaHomePage extends StatelessWidget {
           if (state.errorMessage.isNotEmpty) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
+                key: K.snackBarError,
                 backgroundColor: Colors.redAccent,
                 content: Text(state.errorMessage),
                 duration: const Duration(seconds: 2), // Adjust the duration as needed
@@ -77,6 +78,7 @@ class FacturaVentaHomePage extends StatelessWidget {
           if (state.infoMessage.isNotEmpty) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
+                key: K.snackBarInfo,
                 backgroundColor: Colors.blueAccent,
                 content: Text(state.infoMessage),
                 duration: const Duration(seconds: 2), // Adjust the duration as needed

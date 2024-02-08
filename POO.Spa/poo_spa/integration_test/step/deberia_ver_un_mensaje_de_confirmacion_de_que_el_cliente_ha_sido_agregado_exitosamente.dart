@@ -7,5 +7,5 @@ import 'package:poo_spa/src/helpers/key_constant_helper.dart';
 Future<void> deberiaVerUnMensajeDeInformacionIndicandoAgregadoExitosamente(PatrolIntegrationTester  $) async {
 
   await Future.delayed(const Duration(seconds: 1));
-  expect($(K.snackBarInfo), findsOneWidget);  
+  expect($(K.snackBarInfo), findsOneWidget);
 }

@@ -103,6 +103,7 @@ class _FacturaVentaFormState extends State<FacturaVentaForm> {
             )
             .toList();
         return Container(
+          key: K.seleccionarClienteContainer,
           child: Wrap(children: clienteListItems),
         );
       },
@@ -129,6 +130,7 @@ class _FacturaVentaFormState extends State<FacturaVentaForm> {
             )
             .toList();
         return Container(
+          key: K.agregarProductoContainer,
           child: Wrap(children: listItems),
         );
       },
@@ -138,10 +140,6 @@ class _FacturaVentaFormState extends State<FacturaVentaForm> {
   @override
   Widget build(BuildContext context) {
     var listaProductos = widget.state.facturaVenta.facturasVentasProductos.map((e)=>
-    // Row(children: [
-    //   Text(e.producto.nombre),
-    //   Text('Cantidad : ${e.cantidad}')
-    // ],),
     CartItemCard(productSku: e.producto.sku,productName: e.producto.nombre,count: e.cantidad,unitPrice: e.producto.precio)
 
     ).toList();
@@ -174,7 +172,7 @@ class _FacturaVentaFormState extends State<FacturaVentaForm> {
                     // Handle button press
                     _showClientesOptions(context);
                   },
-                  child: const Text('Seleccionar Cliente'), // Button label
+                  child: const Text('Seleccionar Cliente',key: K.facturaVentaFormSeleccionarClienteButton,), // Button label
                 ),
                 TextFormField(
                   key: K.clienteNombreFormField,
@@ -224,7 +222,7 @@ class _FacturaVentaFormState extends State<FacturaVentaForm> {
                     // Handle button press
                     _showProductosOptions(context);
                   },
-                  child: const Text('Agregar producto'), // Button label
+                  child: const Text('Agregar producto',key: K.facturaVentaFormAgregarProductoButton,), // Button label
                 ),
                 const Text('Lista productos'),
                 Card(
@@ -261,7 +259,7 @@ class _FacturaVentaFormState extends State<FacturaVentaForm> {
                       widget.callback(model);
                     }                    
                   },
-                child: const Text("Guardar",key: K.facturaVentaSaveButtonForm,),
+                child: const Text("Guardar",key: K.saveButtonForm,),
               ),
 
               ]),

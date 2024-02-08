@@ -21,7 +21,7 @@ class KeyHelper {
   static const Key clienteEmailFormField = Key("cliente_email_form_field");
   static const Key clienteTipoDocumentoIdentidadCedulaIdentidadFormField = Key("cliente_tipo_documento_identidad_cedula_identidad_form_field");
   static const Key clientetipoDocumentoIdentidadPasaporteFormField = Key("cliente_tipo_documento_identidad_pasaporte_form_field");
-  static const Key clienteSaveButtonForm = Key("cliente_save_button_form");
+  static const Key clienteSaveButtonForm = Key("save_button_form");
 
   //snack bar 
   static const Key snackBarInfo = Key("snack_bar_info");
@@ -32,7 +32,12 @@ class KeyHelper {
 
 
   static const Key AddFloatingActionButton = Key("add_floating_action_button");
+  static const Key seleccionarClienteContainer = Key("seleccionar_cliente_container");
+  static const Key agregarProductoContainer = Key("agregar_producto_container");
 
   //factura_venta
-  static const Key facturaVentaSaveButtonForm = Key("factura_venta_save_button_form");
+  static const Key saveButtonForm = Key("save_button_form");
+  static const Key facturaVentaFormSeleccionarClienteButton = Key("factura_venta_form_seleccionar_cliente_button");
+  static const Key facturaVentaFormAgregarProductoButton = Key("factura_venta_form_agregar_producto_button");
+  
 }

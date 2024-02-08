@@ -17,14 +17,14 @@ import 'step/que_estoy_en_la_pantalla_de_factura_venta.dart';
 import 'step/relleno_los_campos_del_formulario_con_la_informacion_de_la_factura_venta.dart';
 
 void main() {
-  // patrolTest('''Agregar una nueva factura venta rellenando todos los campos deberia mostrar mensaje de exito''', (tester) async {
-  //   await aplicacionEstaCorriendo(tester);
-  //   await estoyEnLaPantallaDeFacturaVenta(tester);
-  //   await presionoElBotonConElIconoDePlus(tester);
-  //   await rellenoLosCamposDelFormularioConLaInformacionDelCliente(tester);
-  //   await presionoElBotonDeGuardar(tester);
-  //   await deberiaVerUnMensajeDeInformacionIndicandoAgregadoExitosamente(tester);
-  // });
+  patrolTest('''Agregar una nueva factura venta rellenando todos los campos deberia mostrar mensaje de exito''', (tester) async {
+    await aplicacionEstaCorriendo(tester);
+    await estoyEnLaPantallaDeFacturaVenta(tester);
+    await presionoElBotonConElIconoDePlus(tester);
+    await rellenoLosCamposDelFormularioConLaInformacionDeLaFacturaVenta(tester);
+    await presionoElBotonDeGuardar(tester);
+    await deberiaVerUnMensajeDeInformacionIndicandoAgregadoExitosamente(tester);
+  });
 
   patrolTest('''Agregar una nueva factura venta sin rellenar campos deberia mostrar un error''', (tester) async {
     await aplicacionEstaCorriendo(tester);
