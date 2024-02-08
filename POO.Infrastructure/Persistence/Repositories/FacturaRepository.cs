@@ -45,18 +45,6 @@ namespace POO.Infrastructure.Persistence.Repositories
                 });
             });
 
-            command.FacturaServicioItems.ForEach(item =>
-            {
-                var servicio = _context.Servicios.FirstOrDefault(e => e.Id == item.ServicioId);
-
-                total = total + (double)(servicio.Tarifa);
-
-                facturaVenta.FacturasVentasServicios.Add(new FacturaVentaServicio()
-                {
-                    ServicioId = item.ServicioId,
-                });
-            });
-
             facturaVenta.Total = command.ApplicarIva ? (total + total * IVA) : total;
 
             _context.FacturaVentas.Add(facturaVenta);
@@ -75,8 +63,8 @@ namespace POO.Infrastructure.Persistence.Repositories
                 throw new ArgumentException("Cliente no valido");
             }
 
-            if(command.FacturaProductoItems.Count() == 0 && command.FacturaServicioItems.Count() == 0) {
-                throw new ArgumentException("debe existir al menos un producto o servicio en la factura");
+            if(command.FacturaProductoItems.Count() == 0 ) {
+                throw new ArgumentException("debe existir al menos un producto en la factura");
             }
 
             command.FacturaProductoItems.ForEach(item =>
@@ -88,14 +76,6 @@ namespace POO.Infrastructure.Persistence.Repositories
                 }
             });
 
-            command.FacturaServicioItems.ForEach(item =>
-            {
-                var servicio = _context.Servicios.Where(c => c.Id== item.ServicioId).FirstOrDefault();
-                if (servicio is null)
-                {
-                    throw new ArgumentException($"Servicio ${item.ServicioId} no valido");
-                }
-            });
         }
 
         public FacturaVenta GetById(int id)

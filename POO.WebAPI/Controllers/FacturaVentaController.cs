@@ -45,13 +45,11 @@ public class FacturaVentaController : ControllerBase
     {
         var productos = DbContext.Productos.ToList();
         var clientes = DbContext.Clientes.ToList();
-        var servicios = DbContext.Servicios.ToList();
 
         return new JsonResult(new
         {
             Productos = productos,
             Clientes = clientes,
-            Servicios = servicios
         });
     }
 

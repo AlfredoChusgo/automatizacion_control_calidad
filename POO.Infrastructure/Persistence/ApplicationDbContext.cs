@@ -11,7 +11,6 @@ namespace POO.Infrastructure.Persistence
     public class ApplicationDbContext : DbContext
     {
         public DbSet<Producto> Productos { get; set; }
-        public DbSet<Servicio> Servicios{ get; set; }
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<FacturaVenta> FacturaVentas{ get; set; }
 
@@ -73,21 +72,6 @@ namespace POO.Infrastructure.Persistence
                 .HasOne(fvp => fvp.Producto)
                 .WithMany(p => p.FacturasVentasProductos)
                 .HasForeignKey(fvp => fvp.ProductoSku);
-
-            // Configure the many-to-many relationship between FacturaVenta and Servicio using the intermediate class
-            modelBuilder.Entity<FacturaVentaServicio>()
-                .HasKey(fvs => new { fvs.FacturaVentaId, fvs.ServicioId });
-
-            modelBuilder.Entity<FacturaVentaServicio>()
-                .HasOne(fvs => fvs.FacturaVenta)
-                .WithMany(fv => fv.FacturasVentasServicios)
-                .HasForeignKey(fvs => fvs.FacturaVentaId);
-
-            modelBuilder.Entity<FacturaVentaServicio>()
-                .HasOne(fvs => fvs.Servicio)
-                .WithMany(s => s.FacturasVentasServicios)
-                .HasForeignKey(fvs => fvs.ServicioId);
-
 
             base.OnModelCreating(modelBuilder);
         }

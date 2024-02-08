@@ -71,15 +71,6 @@ namespace Poo.Infrastructure.Test
             DbContext.Productos.AddRange(productos);
 
 
-            var servicios = new List<Servicio>
-        {
-            new Servicio { Nombre = "Servicio1", Tarifa = 5 },
-            new Servicio { Nombre = "Servicio2", Tarifa = 8 },
-            // Add more seed data as needed
-        };
-
-            DbContext.Servicios.AddRange(servicios);
-
             var clientes = new List<Cliente>
             {
             new() { Nombre = "Cliente1", Direccion = "Direccion1" },
@@ -110,11 +101,6 @@ namespace Poo.Infrastructure.Test
             return DbContext.Productos.FirstOrDefault();            
         }
 
-        public Servicio GetServicio()
-        {
-            return DbContext.Servicios.FirstOrDefault();
-            //return servicio.Id;
-        }
     }
 
 }

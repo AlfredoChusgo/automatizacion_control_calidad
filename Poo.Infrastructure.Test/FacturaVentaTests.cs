@@ -32,13 +32,9 @@ namespace Poo.Infrastructure.Test
                 {
                     new FacturaProductoItem(_testFixture.GetProducto().Sku,productCount)
                 },
-                FacturaServicioItems : new List<FacturaServicioItem>
-                {
-                    new FacturaServicioItem(_testFixture.GetServicio().Id)
-                },
                 ApplicarIva : true
             );
-            double baseTotal = _testFixture.GetProducto().Precio * productCount + _testFixture.GetServicio().Tarifa;
+            double baseTotal = _testFixture.GetProducto().Precio * productCount;
             double totalWithIva = baseTotal + baseTotal * 0.13;
 
             //act
@@ -48,8 +44,7 @@ namespace Poo.Infrastructure.Test
             var facturaVentaFromDb = _testFixture.DbContext.FacturaVentas.LastOrDefault();
 
             facturaVentaFromDb.Should().NotBeNull();
-            facturaVentaFromDb.FacturasVentasProductos.Count.Should().Be(1);
-            facturaVentaFromDb.FacturasVentasServicios.Count.Should().Be(1);
+            facturaVentaFromDb.FacturasVentasProductos.Count.Should().Be(1);            
             facturaVentaFromDb.Impuesto.Should().Be(0.13);
             facturaVentaFromDb.Total.Should().Be(totalWithIva);
         }
@@ -67,13 +62,9 @@ namespace Poo.Infrastructure.Test
                 {
                     new FacturaProductoItem(_testFixture.GetProducto().Sku,productCount)
                 },
-                FacturaServicioItems: new List<FacturaServicioItem>
-                {
-                    new FacturaServicioItem(_testFixture.GetServicio().Id)
-                },
                 ApplicarIva: false
             );
-            double baseTotal = _testFixture.GetProducto().Precio * productCount + _testFixture.GetServicio().Tarifa;
+            double baseTotal = _testFixture.GetProducto().Precio * productCount ;
             double totalWithIva = baseTotal + baseTotal * 0.13;
 
             //act
@@ -84,7 +75,6 @@ namespace Poo.Infrastructure.Test
             //assert
             facturaVentaFromDb.Should().NotBeNull();
             facturaVentaFromDb.FacturasVentasProductos.Count.Should().Be(1);
-            facturaVentaFromDb.FacturasVentasServicios.Count.Should().Be(1);
             facturaVentaFromDb.Impuesto.Should().Be(0);
             facturaVentaFromDb.Total.Should().NotBe(totalWithIva);
             facturaVentaFromDb.Total.Should().Be(baseTotal);
@@ -101,10 +91,6 @@ namespace Poo.Infrastructure.Test
                 FacturaProductoItems: new List<FacturaProductoItem>
                 {
                     new FacturaProductoItem(_testFixture.GetProducto().Sku,2)
-                },
-                FacturaServicioItems: new List<FacturaServicioItem>
-                {
-                    new FacturaServicioItem(_testFixture.GetServicio().Id)
                 },
                 ApplicarIva: true
             );
@@ -126,10 +112,6 @@ namespace Poo.Infrastructure.Test
                 FacturaProductoItems: new List<FacturaProductoItem>
                 {
                     new FacturaProductoItem("InvalidSku",2)
-                },
-                FacturaServicioItems: new List<FacturaServicioItem>
-                {
-                    new FacturaServicioItem(_testFixture.GetServicio().Id)
                 },
                 ApplicarIva: true
             );

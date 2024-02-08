@@ -17,7 +17,6 @@ public class FacturaVenta
     public CondicionPago CondicionPago {  get; set; }
 
     public List<FacturaVentaProducto> FacturasVentasProductos { get; set; } = new List<FacturaVentaProducto>();
-    public List<FacturaVentaServicio> FacturasVentasServicios { get; set; } = new List<FacturaVentaServicio>();
 
     public double Impuesto { get; set; }
 
@@ -45,14 +44,4 @@ public class FacturaVentaProducto
     public Producto Producto { get; set; }
 
     public int Cantidad { get; set; } 
-}
-
-public class FacturaVentaServicio
-{
-    public int FacturaVentaId { get; set; }
-    public FacturaVenta FacturaVenta { get; set; }
-
-    public int ServicioId { get; set; }
-    public Servicio Servicio { get; set; }
-
 }
