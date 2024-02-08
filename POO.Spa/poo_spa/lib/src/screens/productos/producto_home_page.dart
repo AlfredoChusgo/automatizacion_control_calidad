@@ -2,8 +2,6 @@ import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:poo_spa/src/blocs/productos/productos_bloc.dart';
-import 'package:poo_spa/src/repositories/producto_repository.dart';
-import 'package:barcode/barcode.dart';
 import 'package:poo_spa/src/screens/productos/producto_form_page.dart';
 import '../../models/producto.dart';
 
@@ -22,10 +20,10 @@ class ProductoHomePage extends StatelessWidget {
         actions: [
           // Add your ActionButton here
           IconButton(
-            icon: Icon(Icons.update),
+            icon: const Icon(Icons.update),
             onPressed: () {
               // Add your action button logic here
-              context.read<ProductosBloc>().add(LoadProductosEvent());
+              context.read<ProductosBloc>().add(const LoadProductosEvent());
             },
           ),
         ],
@@ -71,7 +69,7 @@ class ProductoHomePage extends StatelessWidget {
               SnackBar(
                 backgroundColor: Colors.redAccent,
                 content: Text(state.errorMessage),
-                duration: Duration(seconds: 2), // Adjust the duration as needed
+                duration: const Duration(seconds: 2), // Adjust the duration as needed
               ),
             );
           }
@@ -81,7 +79,7 @@ class ProductoHomePage extends StatelessWidget {
               SnackBar(
                 backgroundColor: Colors.blueAccent,
                 content: Text(state.infoMessage),
-                duration: Duration(seconds: 2), // Adjust the duration as needed
+                duration: const Duration(seconds: 2), // Adjust the duration as needed
               ),
             );
           }
@@ -91,7 +89,7 @@ class ProductoHomePage extends StatelessWidget {
               SnackBar(
                 backgroundColor: Colors.greenAccent,
                 content: Text(state.infoMessage),
-                duration: Duration(seconds: 2), // Adjust the duration as needed
+                duration: const Duration(seconds: 2), // Adjust the duration as needed
               ),
             );
           }

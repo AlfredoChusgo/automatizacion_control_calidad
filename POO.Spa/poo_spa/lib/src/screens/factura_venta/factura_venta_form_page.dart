@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:poo_spa/src/blocs/factura_ventas/factura_venta_form_bloc.dart';
 import 'package:poo_spa/src/helpers/key_constant_helper.dart';
 
-import '../../blocs/factura_ventas/factura_ventas_bloc.dart';
 import '../../models/factura_venta.dart';
 
 class FacturaVentaFormPage extends StatelessWidget {
@@ -91,7 +90,7 @@ class _FacturaVentaFormState extends State<FacturaVentaForm> {
         var clienteListItems = widget.state.clientes
             .map(
               (e) => ListTile(
-                leading: Icon(Icons.person),
+                leading: const Icon(Icons.person),
                 title: Text('${e.nombre} nit:${e.numeroDocumentoIdentidad}'),
                 onTap: () {
                   // Handle option selection here
@@ -117,8 +116,8 @@ class _FacturaVentaFormState extends State<FacturaVentaForm> {
         var listItems = widget.state.productos
             .map(
               (e) => ListTile(
-                leading: Icon(Icons.shopping_cart),
-                title: Text('${e.nombre}'),
+                leading: const Icon(Icons.shopping_cart),
+                title: Text(e.nombre),
                 onTap: () {
                   // Handle option selection here
                   context
@@ -165,7 +164,7 @@ class _FacturaVentaFormState extends State<FacturaVentaForm> {
                 // emailController.text = productFake.email ;
                 //tipoDocumentoIdentidadController.text = productFake.tipoDocumentoIdentidad.toString() ;
               },
-              child: Icon(Icons.question_mark),
+              child: const Icon(Icons.question_mark),
             ),
             const SizedBox(height: 16.0),
             Card(
@@ -175,7 +174,7 @@ class _FacturaVentaFormState extends State<FacturaVentaForm> {
                     // Handle button press
                     _showClientesOptions(context);
                   },
-                  child: Text('Seleccionar Cliente'), // Button label
+                  child: const Text('Seleccionar Cliente'), // Button label
                 ),
                 TextFormField(
                   key: K.clienteNombreFormField,
@@ -207,13 +206,13 @@ class _FacturaVentaFormState extends State<FacturaVentaForm> {
             const SizedBox(height: 16.0),
             Card(
               child: Column(children: [
-                Text('Forma de entrega'),
+                const Text('Forma de entrega'),
                 radioFormaEntrega,
               ]),
             ),
             Card(
               child: Column(children: [
-                Text('Condicion de pago'),
+                const Text('Condicion de pago'),
                 radioCondicionPago,
               ]),
             ),
@@ -225,9 +224,9 @@ class _FacturaVentaFormState extends State<FacturaVentaForm> {
                     // Handle button press
                     _showProductosOptions(context);
                   },
-                  child: Text('Agregar producto'), // Button label
+                  child: const Text('Agregar producto'), // Button label
                 ),
-                Text('Lista productos'),
+                const Text('Lista productos'),
                 Card(
                   child: Column(children: [
                     ...listaProductos
@@ -251,7 +250,7 @@ class _FacturaVentaFormState extends State<FacturaVentaForm> {
                           );
                   widget.callback(model);
                 },
-                child: Text("Guardar"),
+                child: const Text("Guardar"),
               ),
 
               ]),
@@ -363,7 +362,7 @@ class CartItemCard extends StatelessWidget {
   final double unitPrice;
   final int count;
 
-  CartItemCard({
+  const CartItemCard({super.key, 
     required this.productName,
     required this.unitPrice,
     required this.count, required this.productSku,
@@ -382,16 +381,16 @@ class CartItemCard extends StatelessWidget {
           children: [
             Text('Precio Unitario: \$${unitPrice.toStringAsFixed(2)}'),
             Row(children: [
-              Text('Cantidad:'),
+              const Text('Cantidad:'),
               IconButton(onPressed: ()=>{
                   context.read<FacturaVentaFormBloc>().add(FacturaVentaFormIncreaseQuantityProductEvent(productoSku: productSku))
-              }, icon: Icon(Icons.add_circle_rounded)),
+              }, icon: const Icon(Icons.add_circle_rounded)),
               Text(count.toString()),
 
               IconButton(onPressed: ()=>{
                 context.read<FacturaVentaFormBloc>().add(FacturaVentaFormDecreaseQuantityProductEvent(productoSku: productSku))
 
-              }, icon: Icon(Icons.remove_circle))
+              }, icon: const Icon(Icons.remove_circle))
             ],),
             Text('Subtotal: \$${subTotal.toStringAsFixed(2)}'),
           ],

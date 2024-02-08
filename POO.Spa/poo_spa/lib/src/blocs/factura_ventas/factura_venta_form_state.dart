@@ -22,8 +22,8 @@ final class FacturaVentaFormState extends Equatable{
       return FacturaVentaFormState( 
         errorMessage: '', infoMessage: '', isLoading: false, 
         facturaVenta: FacturaVenta.empty(),
-        clientes: [],
-        productos: [],
+        clientes: const [],
+        productos: const [],
         successMessage: '' );
   }
 

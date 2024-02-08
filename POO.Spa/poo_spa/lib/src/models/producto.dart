@@ -121,7 +121,7 @@ class Producto extends Equatable {
   String getDescription(){
     var peso = double.parse(this.peso.toStringAsFixed(2));
     var precio = double.parse(this.precio.toStringAsFixed(2));
-    String subtitle = "${peso} ${this.unidadMedida} --  ${precio} Bs ";
+    String subtitle = "$peso $unidadMedida --  $precio Bs ";
 
     return subtitle;
   }

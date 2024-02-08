@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
 
 import '../../models/cliente.dart';
 import '../../repositories/cliente_repository.dart';
@@ -24,7 +23,7 @@ class ClientesBloc extends Bloc<ClientesEvent, ClientesState> {
             successMessage: ""));
       } catch (e) {
         emit(ClientesState(
-            clientes: [],
+            clientes: const [],
             isLoading: false,
             errorMessage: e.toString(),
             infoMessage: "",

@@ -12,7 +12,7 @@ class FacturaVenta extends Equatable {
   final double impuesto;
   final double total;
 
-  FacturaVenta({
+  const FacturaVenta({
     required this.id,
     required this.cliente,
     required this.fecha,
@@ -61,12 +61,12 @@ class FacturaVenta extends Equatable {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'cliente': cliente?.toJson(),
-      'fecha': fecha?.toIso8601String(),
-      'formaEntrega': formaEntrega?.toString()?.split('.')?.last,
-      'condicionPago': condicionPago?.toString()?.split('.')?.last,
+      'cliente': cliente.toJson(),
+      'fecha': fecha.toIso8601String(),
+      'formaEntrega': formaEntrega.toString().split('.').last,
+      'condicionPago': condicionPago.toString().split('.').last,
       'facturasVentasProductos':
-          facturasVentasProductos?.map((p) => p?.toJson())?.toList(),
+          facturasVentasProductos.map((p) => p.toJson()).toList(),
       'impuesto': impuesto,
       'total': total,
     };
@@ -135,7 +135,7 @@ class FacturaVenta extends Equatable {
    // Empty constructor
   FacturaVenta.empty()
       : id = 0,
-        cliente = Cliente.empty(), // Assuming Cliente has an empty constructor
+        cliente = const Cliente.empty(), // Assuming Cliente has an empty constructor
         fecha = DateTime.now(),
         formaEntrega = FormaEntrega.Envio, // Assuming default value for FormaEntrega
         condicionPago = CondicionPago.Efectivo, // Assuming default value for CondicionPago
@@ -144,7 +144,7 @@ class FacturaVenta extends Equatable {
         total = 0.0;
 
   double getTotal(){
-    if(facturasVentasProductos.length>0){
+    if(facturasVentasProductos.isNotEmpty){
       return facturasVentasProductos.map((element) => element.getTotalCost()).reduce((value, element) => value + element);
     }
     return 0;
@@ -171,7 +171,7 @@ class FacturaVentaProducto extends Equatable {
   final Producto producto;
   final int cantidad;
 
-  FacturaVentaProducto({
+  const FacturaVentaProducto({
     //required this.facturaVenta,
     required this.producto,
     required this.cantidad,
@@ -199,7 +199,7 @@ class FacturaVentaProducto extends Equatable {
   Map<String, dynamic> toJson() {
     return {
       //'facturaVenta': facturaVenta?.toJson(),
-      'producto': producto?.toJson(),
+      'producto': producto.toJson(),
       'cantidad': cantidad,
     };
   }

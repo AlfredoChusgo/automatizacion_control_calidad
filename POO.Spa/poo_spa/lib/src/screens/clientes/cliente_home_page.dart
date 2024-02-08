@@ -1,10 +1,7 @@
-import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:poo_spa/src/blocs/clientes/clientes_bloc.dart';
 import 'package:poo_spa/src/helpers/key_constant_helper.dart';
-import 'package:poo_spa/src/repositories/cliente_repository.dart';
-import 'package:barcode/barcode.dart';
 import 'package:poo_spa/src/screens/clientes/cliente_form_page.dart';
 import '../../models/cliente.dart';
 
@@ -23,10 +20,10 @@ class ClienteHomePage extends StatelessWidget {
         actions: [
           // Add your ActionButton here
           IconButton(
-            icon: Icon(Icons.update),
+            icon: const Icon(Icons.update),
             onPressed: () {
               // Add your action button logic here
-              context.read<ClientesBloc>().add(LoadClientesEvent());
+              context.read<ClientesBloc>().add(const LoadClientesEvent());
             },
           ),
         ],
@@ -40,7 +37,7 @@ class ClienteHomePage extends StatelessWidget {
             MaterialPageRoute(
                 builder: (context) => ClienteFormPage(
                       isReadOnly: false,
-                      cliente: Cliente.empty(),
+                      cliente: const Cliente.empty(),
                       saveButtonText: "Guardar",
                       callback: (cliente) {
                         context
@@ -73,7 +70,7 @@ class ClienteHomePage extends StatelessWidget {
               SnackBar(
                 backgroundColor: Colors.redAccent,
                 content: Text(state.errorMessage),
-                duration: Duration(seconds: 2), // Adjust the duration as needed
+                duration: const Duration(seconds: 2), // Adjust the duration as needed
               ),
             );
           }
@@ -81,9 +78,10 @@ class ClienteHomePage extends StatelessWidget {
           if (state.infoMessage.isNotEmpty) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
+                key: K.snackBarInfo,
                 backgroundColor: Colors.blueAccent,
                 content: Text(state.infoMessage),
-                duration: Duration(seconds: 2), // Adjust the duration as needed
+                duration: const Duration(seconds: 2), // Adjust the duration as needed
               ),
             );
           }
@@ -93,7 +91,7 @@ class ClienteHomePage extends StatelessWidget {
               SnackBar(
                 backgroundColor: Colors.greenAccent,
                 content: Text(state.infoMessage),
-                duration: Duration(seconds: 2), // Adjust the duration as needed
+                duration: const Duration(seconds: 2), // Adjust the duration as needed
               ),
             );
           }

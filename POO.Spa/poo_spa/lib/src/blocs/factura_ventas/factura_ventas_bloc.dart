@@ -1,9 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:poo_spa/src/blocs/productos/productos_bloc.dart';
-import 'package:poo_spa/src/models/cliente.dart';
 import 'package:poo_spa/src/models/factura_venta.dart';
-import 'package:poo_spa/src/models/producto.dart';
 import 'package:poo_spa/src/repositories/factura_venta_repository.dart';
 
 
@@ -26,7 +23,7 @@ class FacturaVentasBloc extends Bloc<FacturaVentasEvent, FacturaVentasState> {
             successMessage: ""));
       } catch (e) {
         emit(FacturaVentasState(
-            facturaVentas: [],
+            facturaVentas: const [],
             isLoading: false,
             errorMessage: e.toString(),
             infoMessage: "",

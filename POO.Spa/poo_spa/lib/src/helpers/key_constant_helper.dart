@@ -1,6 +1,5 @@
 
 import 'package:flutter/foundation.dart';
-import 'package:poo_spa/src/models/cliente.dart';
 
 typedef K = KeyHelper;
 
@@ -22,4 +21,12 @@ class KeyHelper {
   static const Key clienteEmailFormField = Key("cliente_email_form_field");
   static const Key clienteTipoDocumentoIdentidadCedulaIdentidadFormField = Key("cliente_tipo_documento_identidad_cedula_identidad_form_field");
   static const Key clientetipoDocumentoIdentidadPasaporteFormField = Key("cliente_tipo_documento_identidad_pasaporte_form_field");
+  static const Key clienteSaveButtonForm = Key("cliente_save_button_form");
+
+  //snack bar 
+  static const Key snackBarInfo = Key("snack_bar_info");
+  static const Key snackBarError = Key("snack_bar_error");
+
+  //appbar
+  static const Key appBarBackArrowKey = Key("app_bar_back_arrow_button");
 }

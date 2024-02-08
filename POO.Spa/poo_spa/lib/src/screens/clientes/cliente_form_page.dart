@@ -19,6 +19,17 @@ class ClienteFormPage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: const Text('Formulario Cliente'),
+          leading: IconButton(
+            key: K.appBarBackArrowKey,
+            icon: Icon(Icons.arrow_back), // Customize back arrow icon
+            onPressed: () {
+              // Navigate back when back arrow is pressed
+              //Navigator.pop(context);
+              if(Navigator.canPop(context)){
+                Navigator.pop(context);
+              }
+            },
+          ),
         ),
         body: BlocListener<ClientesBloc, ClientesState>(
           listener: (context, state) {
@@ -118,7 +129,7 @@ class _ClienteFormState extends State<ClienteForm> {
               emailController.text = productFake.email ;
               //tipoDocumentoIdentidadController.text = productFake.tipoDocumentoIdentidad.toString() ;
             },
-            child: Icon(Icons.question_mark),
+            child: const Icon(Icons.question_mark),
           ),
             const SizedBox(height: 16.0),
             TextFormField(
@@ -181,9 +192,10 @@ class _ClienteFormState extends State<ClienteForm> {
             
             if (!widget.isReadOnly)
               ElevatedButton(
+                key: K.clienteSaveButtonForm,
                 onPressed: () {
 
-                  Cliente model = Cliente.empty()
+                  Cliente model = const Cliente.empty()
                       .copyWith(
                           //sku: skuController.text,
                           direccion: direccionController.text,

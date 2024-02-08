@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:poo_spa/src/blocs/productos/productos_bloc.dart';
 import 'package:poo_spa/src/models/cliente.dart';
 import 'package:poo_spa/src/models/factura_venta.dart';
 import 'package:poo_spa/src/models/producto.dart';
@@ -130,8 +129,8 @@ class FacturaVentaFormBloc extends Bloc<FacturaVentaFormEvent, FacturaVentaFormS
         var facturaVenta = await repository.createFacturaVenta(event.facturaVenta);
         var clientes = await repository.fetchFacturaVentas();
         emit(FacturaVentaFormState(
-            clientes: [],
-            productos: [],
+            clientes: const [],
+            productos: const [],
             facturaVenta: FacturaVenta.empty(),
             isLoading: false,
             errorMessage: "",

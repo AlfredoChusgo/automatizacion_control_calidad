@@ -7,6 +7,8 @@ import '../clientes/cliente_home_page.dart';
 import '../productos/producto_home_page.dart';
 
 class AppHomePage extends StatefulWidget {
+  const AppHomePage({super.key});
+
   @override
   _AppHomePageState createState() => _AppHomePageState();
 }
@@ -16,9 +18,9 @@ class _AppHomePageState extends State<AppHomePage> {
 
   // Pages to be displayed in the navigation bar
   final List<Widget> _pages = [
-    ProductoHomePage(),
-    ClienteHomePage(),
-    FacturaVentaHomePage()
+    const ProductoHomePage(),
+    const ClienteHomePage(),
+    const FacturaVentaHomePage()
   ];
 
   @override
@@ -58,9 +60,11 @@ class _AppHomePageState extends State<AppHomePage> {
 }
 
 class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text('Profile Page'),
     );
   }

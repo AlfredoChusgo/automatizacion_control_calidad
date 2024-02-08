@@ -135,7 +135,7 @@ class _ProductoFormState extends State<ProductoForm> {
               nombreFabricanteController.text = productFake.nombreFabricante ;
               nombreProveedorController.text = productFake.nombreProveedor;
             },
-            child: Icon(Icons.question_mark),
+            child: const Icon(Icons.question_mark),
           ),
             const SizedBox(height: 16.0),
             TextFormField(

@@ -7,7 +7,6 @@ import 'package:poo_spa/src/repositories/cliente_repository.dart';
 import 'package:poo_spa/src/repositories/factura_venta_repository.dart';
 import 'package:poo_spa/src/repositories/producto_repository.dart';
 import 'package:poo_spa/src/screens/home/app_home_page.dart';
-import 'package:poo_spa/src/screens/productos/producto_home_page.dart';
 
 import 'blocs/clientes/clientes_bloc.dart';
 
@@ -47,7 +46,7 @@ class MyApp extends StatelessWidget {
         create: (_) => FacturaVentaFormBloc(repository: facturaVentaRepository, clientesRepository: clientesRepository, productosRepository: productRepository)
         ..add(const LoadFacturaVentaFormEvent()),
       )
-    ], child: MaterialApp(
+    ], child: const MaterialApp(
       // home: ProductoHomePage(),
       home: AppHomePage(),
     debugShowCheckedModeBanner: false,));

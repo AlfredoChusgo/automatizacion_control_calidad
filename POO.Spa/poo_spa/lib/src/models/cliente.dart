@@ -9,7 +9,7 @@ class Cliente extends Equatable {
   final String email;
   final TipoDocumentoIdentidad tipoDocumentoIdentidad;
 
-  Cliente({
+  const Cliente({
     required this.id,
     required this.nombre,
     required this.direccion,
@@ -84,14 +84,14 @@ class Cliente extends Equatable {
   }
 
   String getDescription() {
-    String subtitle = "${this.nombre} Tipo Documento:  ${this.tipoDocumentoIdentidad} Nro Documento:  ${this.numeroDocumentoIdentidad}";
+    String subtitle = "$nombre Tipo Documento:  $tipoDocumentoIdentidad Nro Documento:  $numeroDocumentoIdentidad";
 
     return subtitle;
   }
 
 
   // Empty default constructor
-  Cliente.empty() : id = 0, nombre = '', direccion = '', numeroDocumentoIdentidad = 0, email = '', tipoDocumentoIdentidad = TipoDocumentoIdentidad.CedulaIdentidad;
+  const Cliente.empty() : id = 0, nombre = '', direccion = '', numeroDocumentoIdentidad = 0, email = '', tipoDocumentoIdentidad = TipoDocumentoIdentidad.CedulaIdentidad;
 
   factory Cliente.fake() {
     final faker = Faker();

@@ -20,12 +20,12 @@ class FacturaVentasRepository  {
     }
   }
 
-  Future<void> createFacturaVenta(FacturaVenta factura_venta) async {
+  Future<void> createFacturaVenta(FacturaVenta facturaVenta) async {
     final response = await http.post(
       Uri.parse(baseUrl),
       headers: {'Content-Type': 'application/json'},
       // body: json.encode(factura_venta.toJson()),
-      body: json.encode(factura_venta.toFacturaVentaCreateCommand().toJson()),
+      body: json.encode(facturaVenta.toFacturaVentaCreateCommand().toJson()),
     );
 
     if (response.statusCode != 200) {
@@ -33,11 +33,11 @@ class FacturaVentasRepository  {
     }
   }
 
-  Future<FacturaVenta> updateFacturaVenta(FacturaVenta factura_venta,String sku) async {
+  Future<FacturaVenta> updateFacturaVenta(FacturaVenta facturaVenta,String sku) async {
     final response = await http.put(
       Uri.parse('$baseUrl/$sku'),
       headers: {'Content-Type': 'application/json'},
-      body: json.encode(factura_venta.toJson()),
+      body: json.encode(facturaVenta.toJson()),
     );
 
     if (response.statusCode == 200) {
