@@ -25,7 +25,7 @@ class FacturaVentasRepository  {
       Uri.parse(baseUrl),
       headers: {'Content-Type': 'application/json'},
       // body: json.encode(factura_venta.toJson()),
-      body: json.encode(factura_venta.toJson()),
+      body: json.encode(factura_venta.toFacturaVentaCreateCommand().toJson()),
     );
 
     if (response.statusCode != 200) {

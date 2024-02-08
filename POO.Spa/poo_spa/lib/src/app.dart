@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:poo_spa/src/blocs/factura_ventas/factura_venta_form_bloc.dart';
 import 'package:poo_spa/src/blocs/factura_ventas/factura_ventas_bloc.dart';
 import 'package:poo_spa/src/blocs/productos/productos_bloc.dart';
 import 'package:poo_spa/src/repositories/cliente_repository.dart';
@@ -41,6 +42,10 @@ class MyApp extends StatelessWidget {
       BlocProvider(
         create: (_) => FacturaVentasBloc(repository: facturaVentaRepository
         )..add(const LoadFacturaVentasEvent()),
+      ),
+      BlocProvider(
+        create: (_) => FacturaVentaFormBloc(repository: facturaVentaRepository, clientesRepository: clientesRepository, productosRepository: productRepository)
+        ..add(const LoadFacturaVentaFormEvent()),
       )
     ], child: MaterialApp(
       // home: ProductoHomePage(),

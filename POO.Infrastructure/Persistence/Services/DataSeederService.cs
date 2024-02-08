@@ -82,7 +82,7 @@ public class DataSeederService
                 Total = f.Random.Double(0.0,6000.0)
             })
             ;
-            var facturaVentas = fakerFacturaVentas.Generate(15);
+            var facturaVentas = fakerFacturaVentas.Generate(0);
             _context.FacturaVentas.AddRange(facturaVentas);
             _context.SaveChanges();
         }

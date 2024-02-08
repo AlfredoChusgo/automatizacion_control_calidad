@@ -9,6 +9,7 @@ import 'package:barcode/barcode.dart';
 import 'package:poo_spa/src/screens/clientes/cliente_form_page.dart';
 import '../../blocs/factura_ventas/factura_ventas_bloc.dart';
 import '../../models/cliente.dart';
+import 'factura_venta_form_page.dart';
 
 class FacturaVentaHomePage extends StatelessWidget {
   const FacturaVentaHomePage({super.key});
@@ -37,20 +38,19 @@ class FacturaVentaHomePage extends StatelessWidget {
         //key: K.clienteHomePageAddFacturaVentaFloatingActionButton, todo
         onPressed: () {
           //Add your action here
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //       builder: (context) => FacturaVentaFormPage(
-          //             isReadOnly: false,
-          //             cliente: FacturaVenta.empty(),
-          //             saveButtonText: "Guardar",
-          //             callback: (cliente) {
-          //               context
-          //                   .read<FacturaVentasBloc>()
-          //                   .add(AddFacturaVentaEvent(cliente));
-          //             },
-          //           )),
-          // ); todo
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => FacturaVentaFormPage(
+                      isReadOnly: false,
+                      saveButtonText: "Guardar",
+                      callback: (facturaVenta) {
+                        context
+                            .read<FacturaVentasBloc>()
+                            .add(AddFacturaVentaEvent(facturaVenta));
+                      },
+                    )),
+          );
         },
         child: const Icon(Icons.add),
       ),
@@ -196,7 +196,7 @@ class FacturaVentaCard extends StatelessWidget {
           children: <Widget>[
             ListTile(
               // leading: Icon(Icons.receipt),
-              title: Text('Factura # ${facturaVenta.id}'),
+              title: Text('Factura # ${facturaVenta.id}\t NIT: ${facturaVenta.cliente.numeroDocumentoIdentidad}\nCliente: ${facturaVenta.cliente.nombre}'),
               // subtitle: Text('${facturaVenta.getDescription()}'),
               subtitle: DataTableFacturaVenta(facturaVenta: facturaVenta),
             ),

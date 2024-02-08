@@ -81,7 +81,7 @@ class FacturaVenta extends Equatable {
       condicionPago: condicionPagoFromString(json['condicionPago']),
       facturasVentasProductos: (json['facturasVentasProductos'] as List)
           .map((p) => FacturaVentaProducto.fromJson(p)).toList(),
-      impuesto: json['impuesto'],
+      impuesto: double.parse(json['impuesto'].toString()),
       total: json['total'],
     );
   }
@@ -130,6 +130,35 @@ class FacturaVenta extends Equatable {
     //  Total: ${total.toStringAsFixed(2)} \$
     // ''';
     return facturasVentasProductos.map((e) => "${e.producto.nombre} X ${e.cantidad}").join( "\n");
+  }
+
+   // Empty constructor
+  FacturaVenta.empty()
+      : id = 0,
+        cliente = Cliente.empty(), // Assuming Cliente has an empty constructor
+        fecha = DateTime.now(),
+        formaEntrega = FormaEntrega.Envio, // Assuming default value for FormaEntrega
+        condicionPago = CondicionPago.Efectivo, // Assuming default value for CondicionPago
+        facturasVentasProductos = [],
+        impuesto = 0.0,
+        total = 0.0;
+
+  double getTotal(){
+    if(facturasVentasProductos.length>0){
+      return facturasVentasProductos.map((element) => element.getTotalCost()).reduce((value, element) => value + element);
+    }
+    return 0;
+    
+  }
+  
+  FacturaVentaCreateCommand toFacturaVentaCreateCommand(){
+    return FacturaVentaCreateCommand(
+      applicarIva: false,
+      clienteId: cliente.id,
+      formaEntrega: formaEntrega.index,
+      condicionPago: condicionPago.index,
+      facturaProductoItems: facturasVentasProductos.map((e) => e.toFacturaProductoItem()).toList()
+    );
   }
 }
 
@@ -187,5 +216,46 @@ class FacturaVentaProducto extends Equatable {
     return "${(producto.precio*cantidad).toStringAsFixed(2)} \$";
   }
 
+  double getTotalCost(){
+    return (producto.precio*cantidad);
+  }
 
+  FacturaProductoItem toFacturaProductoItem(){
+    return FacturaProductoItem(productoSku: producto.sku,cantidad: cantidad);
+  }
+}
+
+class FacturaVentaCreateCommand  {
+  final int clienteId;
+  final int formaEntrega;
+  final int condicionPago;
+  final List<FacturaProductoItem> facturaProductoItems;
+  final bool applicarIva;
+
+  FacturaVentaCreateCommand({required this.clienteId, required this.formaEntrega, required this.condicionPago, required this.facturaProductoItems, required this.applicarIva});
+
+  Map<String, dynamic> toJson() {
+    return {
+      'applicarIva': applicarIva,
+      'clienteId': clienteId,
+      'formaEntrega': formaEntrega,
+      'condicionPago': condicionPago,
+      'facturaProductoItems':
+          facturaProductoItems.map((item) => item.toJson()).toList(),
+    };
+  }
+}
+
+class FacturaProductoItem{
+  final String productoSku;
+  final int cantidad;
+
+  FacturaProductoItem({required this.productoSku, required this.cantidad});
+
+  Map<String, dynamic> toJson() {
+    return {
+      'productoSku': productoSku,
+      'cantidad': cantidad,
+    };
+  }
 }
