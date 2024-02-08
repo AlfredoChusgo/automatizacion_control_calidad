@@ -194,17 +194,29 @@ class _ClienteFormState extends State<ClienteForm> {
               ElevatedButton(
                 key: K.clienteSaveButtonForm,
                 onPressed: () {
-
-                  Cliente model = const Cliente.empty()
-                      .copyWith(
-                          //sku: skuController.text,
-                          direccion: direccionController.text,
-                          numeroDocumentoIdentidad : int.parse(numeroDocumentoIdentidadController.text),
-                          nombre : nombreController.text,
-                          email: emailController.text,
-                          tipoDocumentoIdentidad: radioTipoDocumentoIdentidad.getSelectedValue()
-                          );
-                  widget.callback(model);
+                  Cliente model = const Cliente.empty().copyWith(
+                      //sku: skuController.text,
+                      direccion: direccionController.text,
+                      numeroDocumentoIdentidad:
+                          int.parse(numeroDocumentoIdentidadController.text),
+                      nombre: nombreController.text,
+                      email: emailController.text,
+                      tipoDocumentoIdentidad:
+                          radioTipoDocumentoIdentidad.getSelectedValue());
+                  if (model.nombre.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        key: K.snackBarError,
+                        backgroundColor: Colors.redAccent,
+                        content: Text("campo nombre no puede estar vacio"),
+                        duration: Duration(
+                            seconds: 2), // Adjust the duration as needed
+                      ),
+                    );
+                  }else{
+                    widget.callback(model);  
+                  }
+                  
                 },
                 child: Text(widget.saveButtonText),
               ),
