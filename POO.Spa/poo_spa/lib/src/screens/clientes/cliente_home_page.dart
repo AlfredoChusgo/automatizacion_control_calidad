@@ -29,7 +29,7 @@ class ClienteHomePage extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        key: K.clienteHomePageAddClienteFloatingActionButton,
+        key: K.AddFloatingActionButton,
         onPressed: () {
           //Add your action here
           Navigator.push(

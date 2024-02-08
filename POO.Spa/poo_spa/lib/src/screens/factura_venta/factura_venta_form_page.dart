@@ -236,21 +236,32 @@ class _FacturaVentaFormState extends State<FacturaVentaForm> {
                 ,style: Theme.of(context).textTheme.headlineMedium,),
                 
                 ElevatedButton(
-                onPressed: () {
-
-                  FacturaVenta model = FacturaVenta.empty()
-                      .copyWith(
-                          //sku: skuController.text,
-                          cliente: widget.state.facturaVenta.cliente,
-                          fecha: DateTime.now(),
-                          formaEntrega: radioFormaEntrega.getSelectedValue(),
-                          condicionPago: radioCondicionPago.getSelectedValue(),
-                          facturasVentasProductos: widget.state.facturaVenta.facturasVentasProductos,
-                          impuesto: 0.00,
-                          );
-                  widget.callback(model);
-                },
-                child: const Text("Guardar"),
+                  onPressed: () {
+                    FacturaVenta model = FacturaVenta.empty().copyWith(
+                      //sku: skuController.text,
+                      cliente: widget.state.facturaVenta.cliente,
+                      fecha: DateTime.now(),
+                      formaEntrega: radioFormaEntrega.getSelectedValue(),
+                      condicionPago: radioCondicionPago.getSelectedValue(),
+                      facturasVentasProductos:
+                          widget.state.facturaVenta.facturasVentasProductos,
+                      impuesto: 0.00,
+                    );
+                    if (!model.isValid()) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        key: K.snackBarError,
+                        backgroundColor: Colors.redAccent,
+                        content: Text("todos los campos son necesarios"),
+                        duration: Duration(
+                            seconds: 2), // Adjust the duration as needed
+                      ),
+                    );
+                    } else {
+                      widget.callback(model);
+                    }                    
+                  },
+                child: const Text("Guardar",key: K.facturaVentaSaveButtonForm,),
               ),
 
               ]),

@@ -29,4 +29,10 @@ class KeyHelper {
 
   //appbar
   static const Key appBarBackArrowKey = Key("app_bar_back_arrow_button");
+
+
+  static const Key AddFloatingActionButton = Key("add_floating_action_button");
+
+  //factura_venta
+  static const Key facturaVentaSaveButtonForm = Key("factura_venta_save_button_form");
 }

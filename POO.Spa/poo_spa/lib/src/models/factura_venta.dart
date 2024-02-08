@@ -160,6 +160,10 @@ class FacturaVenta extends Equatable {
       facturaProductoItems: facturasVentasProductos.map((e) => e.toFacturaProductoItem()).toList()
     );
   }
+
+  bool isValid(){
+    return cliente.id != 0;
+  }
 }
 
 enum FormaEntrega { Envio, RetiroEnTienda }

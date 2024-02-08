@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:poo_spa/src/models/factura_venta.dart';
 import '../../blocs/factura_ventas/factura_ventas_bloc.dart';
+import '../../helpers/key_constant_helper.dart';
 import 'factura_venta_form_page.dart';
 
 class FacturaVentaHomePage extends StatelessWidget {
@@ -28,7 +29,7 @@ class FacturaVentaHomePage extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        //key: K.clienteHomePageAddFacturaVentaFloatingActionButton, todo
+        key: K.AddFloatingActionButton,
         onPressed: () {
           //Add your action here
           Navigator.push(
